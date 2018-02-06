@@ -43,12 +43,6 @@
             <artifactId>weixin4j-sdk</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
-        <!-- 支付宝支付 -->
-        <dependency>
-            <groupId>com.alipay</groupId>
-            <artifactId>alipay-sdk-java</artifactId>
-            <version>1.0.0</version>
-        </dependency>
     </dependencies>
     <build>
         <finalName>opening-wechat</finalName>
