@@ -1,4 +1,4 @@
-package com.weizidong.rest;
+package com.qcdl.rest;
 
 import com.alibaba.fastjson.support.jaxrs.FastJsonProvider;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;

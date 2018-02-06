@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qcdl.model.mapper.OperationLogMapper">
+    <resultMap id="BaseResultMap" type="com.qcdl.model.entity.OperationLog">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="logtype" jdbcType="VARCHAR" property="logtype"/>
+        <result column="logname" jdbcType="VARCHAR" property="logname"/>
+        <result column="aid" jdbcType="INTEGER" property="aid"/>
+        <result column="classname" jdbcType="VARCHAR" property="classname"/>
+        <result column="createtime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="succeed" jdbcType="VARCHAR" property="succeed"/>
+        <result column="method" jdbcType="LONGVARCHAR" property="method"/>
+        <result column="message" jdbcType="LONGVARCHAR" property="message"/>
+    </resultMap>
+</mapper>
