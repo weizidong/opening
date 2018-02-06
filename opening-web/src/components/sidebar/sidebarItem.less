@@ -1,0 +1,26 @@
+@import "../../base.less";
+.sidebar-item {
+  text-align: left;
+  overflow: hidden;
+  .icon-font{
+    vertical-align: middle;
+    margin-right: 10px;
+    position: relative;
+  }
+  .el-menu-item, .el-submenu__title {
+    padding: 0;
+    background-color: @bg-white;
+    &:hover {
+      color: @sidebar-active;
+      border-left: 3px solid @sidebar-active;
+      background-color: @bg-white;
+    }
+    &.is-active {
+      border-left: 3px solid @sidebar-active;
+    }
+  }
+  .el-submenu.is-active > .el-submenu__title {
+    border-left: 3px solid @sidebar-active;
+    color: @sidebar-active;
+  }
+}

@@ -1,0 +1,11 @@
+**/target/
+**/.classpath
+**/.project
+**/.settings/
+**/.idea/
+**/*.db
+**/*.rar
+**/*.iml
+**/*.zip
+**/download/
+**/node_modules/
