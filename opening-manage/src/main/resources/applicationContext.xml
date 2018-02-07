@@ -35,7 +35,7 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
-        <property name="typeAliasesPackage" value="com.qcdl.model.mapper"/>
+        <property name="typeAliasesPackage" value="com.**.model.mapper"/>
         <property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageInterceptor">
@@ -54,7 +54,7 @@
     </bean>
     <!-- mapper扫描 -->
     <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.qcdl.model.mapper"/>
+        <property name="basePackage" value="com.**.model.mapper"/>
         <property name="properties">
             <value>
                 mappers=tk.mybatis.mapper.common.Mapper,tk.mybatis.mapper.common.MySqlMapper
@@ -67,6 +67,7 @@
     </bean>
     <!-- 包扫描,需要配置基包 -->
     <context:component-scan base-package="com.qcdl"/>
+    <context:component-scan base-package="com.weizidong"/>
     <!-- 对事务进行代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <!-- 配置事务管理器 -->
