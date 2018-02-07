@@ -11,7 +11,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/rest': {
-        target: 'http://sxjy-web.china-start.cn',
+        target: 'http://manage.chaoyueshidai.xin',
         changeOrigin: true,
         pathRewrite: {
           '^/rest': '/rest'
@@ -44,9 +44,9 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../../opening-manage/src/main/webapp/index.html'),
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: path.resolve(__dirname, '../../opening-manage/src/main/webapp'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     /**
