@@ -1,4 +1,4 @@
-package com.qcdl;
+package com.weizidong;
 
 import org.junit.After;
 import org.junit.runner.RunWith;

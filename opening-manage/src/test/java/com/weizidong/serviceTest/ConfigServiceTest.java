@@ -1,8 +1,8 @@
-package com.qcdl.serviceTest;
+package com.weizidong.serviceTest;
 
 import com.alibaba.fastjson.JSON;
 import com.qcdl.service.impl.ConfigServiceI;
-import com.qcdl.BasicTest;
+import com.weizidong.BasicTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

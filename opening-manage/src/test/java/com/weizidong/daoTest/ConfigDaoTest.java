@@ -1,8 +1,8 @@
-package com.qcdl.daoTest;
+package com.weizidong.daoTest;
 
 import com.alibaba.fastjson.JSON;
 import com.qcdl.model.dao.ConfigDao;
-import com.qcdl.BasicTest;
+import com.weizidong.BasicTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
