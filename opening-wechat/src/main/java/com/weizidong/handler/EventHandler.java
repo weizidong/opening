@@ -2,8 +2,14 @@ package com.weizidong.handler;
 
 import com.weizidong.message.event.*;
 import com.weizidong.message.handler.IEventHandler;
+import com.weizidong.message.output.TextOutputMessage;
 import com.weizidong.message.output.base.OutputMessage;
+import com.weizidong.model.entity.User;
+import com.weizidong.service.UserService;
+import com.weizidong.wechat.WechatUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.wzd.framwork.utils.ThreadPoolUtil;
 
 /**
  * 微信事件处理器
@@ -13,9 +19,26 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class EventHandler implements IEventHandler {
+    @Autowired
+    private UserService userService;
+
     @Override
-    public OutputMessage subscribe(SubscribeEventMessage subscribeEventMessage) {
-        return null;
+    public OutputMessage subscribe(SubscribeEventMessage message) {
+        // 异步处理，及时回复
+        ThreadPoolUtil.execute(() -> {
+            // 获取openid
+            String openid = message.getFromUserName();
+            // 检查是否存在该openid
+            if (!userService.check(openid)) {
+                // 获取微信用户
+                WechatUser wechatUser = WechatUser.getUserInfo(openid);
+                // 转换成本地用户
+                User u = User.convert(wechatUser);
+                // 保存新用户
+                userService.create(u);
+            }
+        });
+        return new TextOutputMessage("开始聊天吧。。。");
     }
 
     @Override
