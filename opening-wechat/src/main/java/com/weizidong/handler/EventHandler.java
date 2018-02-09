@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.wzd.framwork.utils.ThreadPoolUtil;
 
+import java.util.Date;
+
 /**
  * 微信事件处理器
  *
@@ -36,6 +38,8 @@ public class EventHandler implements IEventHandler {
                 WechatUser wechatUser = WechatUser.getUserInfo(openid);
                 // 转换成本地用户
                 User u = User.convert(wechatUser);
+                u.setSubscribe(Subscribe.已关注.getValue());
+                u.setSubscribeTime(new Date());
                 // 保存新用户
                 userService.create(u);
             }
