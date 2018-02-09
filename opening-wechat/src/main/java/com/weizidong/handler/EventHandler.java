@@ -2,13 +2,13 @@ package com.weizidong.handler;
 
 import com.weizidong.message.event.*;
 import com.weizidong.message.handler.IEventHandler;
+import com.weizidong.message.output.OutputMessage;
 import com.weizidong.message.output.TextOutputMessage;
-import com.weizidong.message.output.base.OutputMessage;
 import com.weizidong.model.entity.User;
 import com.weizidong.service.UserService;
 import com.weizidong.wechat.WechatUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.wzd.framwork.utils.ThreadPoolUtil;
 
 /**
@@ -17,7 +17,7 @@ import org.wzd.framwork.utils.ThreadPoolUtil;
  * @author 魏自东
  * @date 2018/2/7 16:59
  */
-@Component
+@Service
 public class EventHandler implements IEventHandler {
     @Autowired
     private UserService userService;
