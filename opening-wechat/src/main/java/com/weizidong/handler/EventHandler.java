@@ -1,7 +1,9 @@
 package com.weizidong.handler;
 
+import com.weizidong.enums.Subscribe;
 import com.weizidong.message.event.*;
 import com.weizidong.message.handler.IEventHandler;
+import com.weizidong.message.output.DefaultOutputMessage;
 import com.weizidong.message.output.OutputMessage;
 import com.weizidong.message.output.TextOutputMessage;
 import com.weizidong.model.entity.User;
@@ -42,8 +44,18 @@ public class EventHandler implements IEventHandler {
     }
 
     @Override
-    public OutputMessage unSubscribe(UnSubscribeEventMessage unSubscribeEventMessage) {
-        return null;
+    public OutputMessage unSubscribe(UnSubscribeEventMessage message) {
+        // 异步处理，及时回复
+        ThreadPoolUtil.execute(() -> {
+            // 获取openid
+            String openid = message.getFromUserName();
+            // 更新用户信息
+            User u = new User();
+            u.setOpenid(openid);
+            u.setSubscribe(Subscribe.未关注.getValue());
+            userService.updateByOpenId(u);
+        });
+        return new DefaultOutputMessage();
     }
 
     @Override

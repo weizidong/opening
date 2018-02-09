@@ -4,6 +4,7 @@ import com.weizidong.model.entity.User;
 import com.weizidong.model.enums.DeleteStatus;
 import com.weizidong.model.mapper.UserMapper;
 import org.springframework.stereotype.Component;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -44,5 +45,18 @@ public class UserDao {
         u.setDeleted(DeleteStatus.未删除.getCode());
         u.setCreateTime(new Date());
         userMapper.insertSelective(u);
+    }
+
+    /**
+     * 根据openid更新用户信息
+     *
+     * @param u 需要更新的用户资料
+     * @author 魏自东
+     * @date 2018/2/9 10:58
+     */
+    public void updateByOpenId(User u) {
+        Example e = new Example(User.class);
+        e.createCriteria().andEqualTo("openid", u.getOpenid());
+        userMapper.updateByExampleSelective(u, e);
     }
 }

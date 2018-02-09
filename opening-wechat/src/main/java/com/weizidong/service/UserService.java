@@ -44,4 +44,18 @@ public class UserService {
     public void create(User u) {
         userDao.create(u);
     }
+
+    /**
+     * 根据Openid更新用户信息
+     *
+     * @param u 需要更新的用户资料，必须包含openid
+     * @author 魏自东
+     * @date 2018/2/9 10:57
+     */
+    public void updateByOpenId(User u) {
+        if (StringUtils.isBlank(u.getOpenid())) {
+            throw new WebException(ResponseCode.参数错误.getCode(), "openid 不能为空！");
+        }
+        userDao.updateByOpenId(u);
+    }
 }
