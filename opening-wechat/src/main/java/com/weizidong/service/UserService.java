@@ -2,6 +2,7 @@ package com.weizidong.service;
 
 import com.weizidong.model.dao.UserDao;
 import com.weizidong.model.entity.User;
+import com.weizidong.wechat.Qrcode;
 import org.apache.commons.lang3.StringUtils;
 import org.restful.api.filter.exception.ResponseCode;
 import org.restful.api.filter.exception.WebException;
@@ -43,6 +44,7 @@ public class UserService {
      */
     public void create(User u) {
         userDao.create(u);
+        Qrcode.create(1000, 1);
     }
 
     /**
@@ -57,5 +59,36 @@ public class UserService {
             throw new WebException(ResponseCode.参数错误.getCode(), "openid 不能为空！");
         }
         userDao.updateByOpenId(u);
+    }
+
+    /**
+     * 根据openid获取用户信息
+     *
+     * @param openid openid
+     * @return 用户信息
+     */
+    public User getByOpenId(String openid) {
+        if (StringUtils.isBlank(openid)) {
+            throw new WebException(ResponseCode.参数错误.getCode(), "openid 不能为空！");
+        }
+        return userDao.getByOpenId(openid);
+    }
+
+    /**
+     * 绑定用户
+     *
+     * @param user 用户
+     */
+    public void bind(User user) {
+    }
+
+    /**
+     * 根据ID获取
+     *
+     * @param id ID
+     * @return 用户信息
+     */
+    public User getById(Integer id) {
+        return userDao.getById(id);
     }
 }

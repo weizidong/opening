@@ -59,4 +59,26 @@ public class UserDao {
         e.createCriteria().andEqualTo("openid", u.getOpenid());
         userMapper.updateByExampleSelective(u, e);
     }
+
+    /**
+     * 根据openid获取用户信息
+     *
+     * @param openid openid
+     * @return 用户信息
+     */
+    public User getByOpenId(String openid) {
+        User u = new User();
+        u.setOpenid(openid);
+        return userMapper.selectOne(u);
+    }
+
+    /**
+     * 根据ID获取
+     *
+     * @param id id
+     * @return 用户信息
+     */
+    public User getById(Integer id) {
+        return userMapper.selectByPrimaryKey(id);
+    }
 }
