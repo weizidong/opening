@@ -2,6 +2,8 @@ package com.weizidong.rest.api;
 
 import com.weizidong.model.entity.User;
 import com.weizidong.service.UserService;
+import org.restful.api.filter.authority.AuthType;
+import org.restful.api.filter.authority.Authority;
 import org.restful.api.session.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -31,6 +33,7 @@ public class UserApi {
 
     @GET
     @Path("/get/{id}")
+    @Authority({AuthType.不检查})
     public User getById(@PathParam("id") Integer id) {
         return userService.getById(id);
     }

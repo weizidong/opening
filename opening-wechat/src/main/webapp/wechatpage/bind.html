@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+	<style type="text/css">
+		.mui-pager {
+			background: url(img/bg-01.jpg) no-repeat;
+			background-size: 100% 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+		}
+		
+		.mui-input-group {
+			position: absolute;
+			width: 100%;
+			background: rgba(0, 0, 0, .7);
+			bottom: 0;
+		}
+		
+		label {
+			color: #FF5053;
+			text-align: right;
+		}
+		
+		.mui-text-center {
+			padding: 2rem;
+		}
+	</style>
+
+	<body>
+		<div class="mui-pager">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>姓名：</label>
+					<input type="text" class="mui-input-clear" disabled="disabled" placeholder="申*健">
+				</div>
+				<div class="mui-input-row">
+					<label>电话号码：</label>
+					<input type="text" class="mui-input-clear" disabled="disabled" placeholder="176****1650">
+				</div>
+				<div class="mui-input-row">
+					<label>身份证号：</label>
+					<input type="text" class="mui-input-clear" id="idNumber" placeholder="请输入正确的身份证进行绑定">
+				</div>
+				<div class="mui-text-center">
+					<button type="button" class="mui-btn mui-btn-red mui-btn-block" id="bind">绑定</button>
+				</div>
+			</form>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init()
+			var id = getQuery().id || 1
+			ajax('/rest/user/get/' + id, {
+
+			})
+		</script>
+	</body>
+
+</html>
