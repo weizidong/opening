@@ -42,9 +42,9 @@ public class UserService {
      * @author 魏自东
      * @date 2018/2/8 16:24
      */
-    public void create(User u) {
+    public String create(User u) {
         userDao.create(u);
-        Qrcode.create(1000, 1);
+        return Qrcode.create(1000, 1);
     }
 
     /**
