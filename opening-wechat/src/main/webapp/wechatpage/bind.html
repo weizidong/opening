@@ -3,12 +3,12 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>绑定用户</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
 	</head>
 	<style type="text/css">
-		.mui-pager {
+		.mui-content {
 			background: url(img/bg-01.jpg) no-repeat;
 			background-size: 100% 100%;
 			position: fixed;
@@ -40,7 +40,7 @@
 	</style>
 
 	<body>
-		<div class="mui-pager">
+		<div class="mui-content">
 			<form class="mui-input-group">
 				<div class="mui-input-row">
 					<label>姓名：</label>
@@ -89,7 +89,7 @@
 						idNumber: idNumber
 					},
 					success: function(data) {
-						console.log(data)
+						location.href = 'agreement.html'
 					}
 				})
 			})

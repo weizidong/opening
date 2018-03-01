@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的资料</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.head-img {
+				width: 180px;
+				height: 180px;
+				border-radius: 50%;
+			}
+			
+			.mui-card-content {
+				padding-top: 50px;
+				padding-bottom: 50px;
+				font-size: 24px;
+			}
+			
+			.mui-input-row label {
+				width: 40%;
+			}
+			
+			.mui-input-row div {
+				font-family: 'Helvetica Neue', Helvetica, sans-serif;
+				line-height: 1.1;
+				padding: 11px 15px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="mui-card">
+				<div class="mui-card-header">
+					<div class="mui-text-center" style="width: 100%;">
+						<img src="img/bg-01.jpg" class="head-img" />
+					</div>
+				</div>
+				<div class="mui-card-content">
+					<div class="mui-input-row">
+						<label>客户名称：</label>
+						<div>申何健 </div>
+					</div>
+					<div class="mui-input-row">
+						<label>认筹号：</label>
+						<div>17683701650</div>
+					</div>
+					<div class="mui-input-row"><label>成交单位：</label>
+						<div>一号楼1-101</div>
+					</div>
+					<div class="mui-input-row"><label>销控时间：</label>
+						<div>2018-03-01 12:23:59</div>
+					</div>
+				</div>
+			</div>
+			<nav class="mui-bar mui-bar-tab">
+				<a class="mui-tab-item" href="house.html">
+					<span class="mui-icon mui-icon-home"></span>
+					<span class="mui-tab-label">房源</span>
+				</a>
+				<a class="mui-tab-item" href="favorite.html">
+					<span class="mui-icon mui-icon-email"></span>
+					<span class="mui-tab-label">收藏</span>
+				</a>
+				<a class="mui-tab-item mui-active" href="me.html">
+					<span class="mui-icon mui-icon-person"></span>
+					<span class="mui-tab-label">我的</span>
+				</a>
+			</nav>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+
+</html>

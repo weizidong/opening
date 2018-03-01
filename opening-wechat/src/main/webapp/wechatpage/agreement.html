@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>微信选房协议</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-content {
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+			}
+			
+			.mui-bottom {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				padding: 2rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div class="mui-text-center">
+				微信选房协议书
+			</div>
+			<div class="mui-bottom mui-text-center">
+				<button type="button" class="mui-btn mui-btn-red" id="refuse">拒绝</button>
+				<button type="button" class="mui-btn mui-btn-blue" id="agree">同意</button>
+			</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui('body').on('tap', '#agree', function() {
+				location.href = ''
+			})
+			mui('body').on('tap', '#refuse', function() {
+				wx.closeWindow()
+			})
+		</script>
+	</body>
+
+</html>
