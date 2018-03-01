@@ -61,7 +61,7 @@
 			mui.init()
 			var id = getQuery().id || 1
 			ajax('/rest/user/get/' + id, {
-
+				type: 'GET'
 			})
 		</script>
 	</body>

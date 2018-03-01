@@ -3,7 +3,7 @@ function ajax(url, config) {
 	console.log('请求:', url)
 	console.log('方式:', config.type || 'POST')
 	console.log('参数:', config.data)
-	url = 'http://localhost:8080' + url + '?debug=1'
+	url = 'http://127.0.0.1:8080' + url + '?debug=1'
 	mui.ajax(url, {
 		data: config.data,
 		dataType: 'json', //服务器返回json格式数据

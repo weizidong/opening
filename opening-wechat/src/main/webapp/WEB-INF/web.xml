@@ -34,6 +34,15 @@
         <filter-name>SpringEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!--跨域过滤器-->
+    <filter>
+        <filter-name>corsFilter</filter-name>
+        <filter-class>org.restful.api.filter.CORSFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>corsFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <!-- 配置微信鉴权oAuth2Filter过滤器 -->
     <filter>
         <filter-name>oAuth2Filter</filter-name>
@@ -46,7 +55,7 @@
     </filter>
     <filter-mapping>
         <filter-name>oAuth2Filter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/wechatpage/*</url-pattern>
     </filter-mapping>
     <!-- 微信消息拦截器 -->
     <filter>
