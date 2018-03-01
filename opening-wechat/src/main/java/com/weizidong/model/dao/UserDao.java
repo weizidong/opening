@@ -81,4 +81,13 @@ public class UserDao {
     public User getById(Integer id) {
         return userMapper.selectByPrimaryKey(id);
     }
+
+    /**
+     * 根据ID更新
+     *
+     * @param user 用户信息
+     */
+    public void updateById(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+    }
 }

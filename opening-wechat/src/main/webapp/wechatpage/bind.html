@@ -30,6 +30,10 @@
 			text-align: right;
 		}
 		
+		input {
+			color: #999999;
+		}
+		
 		.mui-text-center {
 			padding: 2rem;
 		}
@@ -40,11 +44,11 @@
 			<form class="mui-input-group">
 				<div class="mui-input-row">
 					<label>姓名：</label>
-					<input type="text" class="mui-input-clear" disabled="disabled" placeholder="申*健">
+					<input type="text" class="mui-input-clear" id="name" disabled="disabled" placeholder="申*健">
 				</div>
 				<div class="mui-input-row">
 					<label>电话号码：</label>
-					<input type="text" class="mui-input-clear" disabled="disabled" placeholder="176****1650">
+					<input type="text" class="mui-input-clear" id="phone" disabled="disabled" placeholder="176****1650">
 				</div>
 				<div class="mui-input-row">
 					<label>身份证号：</label>
@@ -61,7 +65,33 @@
 			mui.init()
 			var id = getQuery().id || 1
 			ajax('/rest/user/get/' + id, {
-				type: 'GET'
+				type: 'GET',
+				success: function(data) {
+					if(data) {
+						mui('#name')[0].setAttribute('placeholder', data.name || '未知')
+						mui('#phone')[0].setAttribute('placeholder', data.phone ? data.phone.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2') : '未知')
+					} else {
+
+					}
+				}
+			})
+			mui('body').on('tap', '#bind', function() {
+				var idNumber = mui('#idNumber')[0].value
+				if(!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(idNumber)) {
+					mui.alert('请输入正确的身份证号码进行绑定！', '提示', '确定', function(e) {
+						mui('#idNumber')[0].value = ''
+					})
+					return
+				}
+				ajax('/rest/user/bind', {
+					data: {
+						id: id,
+						idNumber: idNumber
+					},
+					success: function(data) {
+						console.log(data)
+					}
+				})
 			})
 		</script>
 	</body>

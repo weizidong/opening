@@ -1,9 +1,9 @@
 function ajax(url, config) {
 	config = config || {};
-	console.log('请求:', url)
-	console.log('方式:', config.type || 'POST')
-	console.log('参数:', config.data)
-	url = 'http://127.0.0.1:8080' + url + '?debug=1'
+	log('请求:', url)
+	log('方式:', config.type || 'POST')
+	log('参数:', config.data)
+	url = 'http://127.0.0.1:8080' + url + '?ACCESS_TOKEN=1'
 	mui.ajax(url, {
 		data: config.data,
 		dataType: 'json', //服务器返回json格式数据
@@ -20,22 +20,40 @@ function ajax(url, config) {
 				data = JSON.parse(data);
 			}
 			if(data.code !== 200) {
-				console.log('错误:', data)
+				log('错误:', data)
 				mui.alert(data.msg, '提示', '确定', function() {
 					config.error && config.error();
 				})
 			} else {
-				console.log('结果:', data.data)
+				log('结果:', data.data)
 				config.success && config.success(data.data);
 			}
 		},
 		error: function(xhr, type, errorThrown) {
 			mui.alert('网络发生异常，请重新加载...', '提示', '确定', function() {
-//				location.reload(true);
+				location.reload(true);
 			});
 			config.error && config.error();
 		}
 	});
+}
+
+function log() {
+	if(!arguments || arguments.length < 1) {
+		console.log(arguments)
+	} else {
+		var str = ''
+		for(var k in arguments) {
+			str += toStr(arguments[k])
+		}
+		console.log(str)
+	}
+}
+
+function toStr(obj) {
+	if(typeof(obj) == "object")
+		return JSON.stringify(obj)
+	return obj
 }
 
 function getQuery() {
@@ -67,30 +85,6 @@ function replaceState(param) {
 	window.history.replaceState(state, state.title, state.url)
 }
 
-function check(obj, config) {
-	if(config.require && !obj[config.field]) {
-		mui.alert(config.require, '提示', '确定');
-		return true;
-	}
-	if(config.pattern && obj[config.field] && !config.pattern.test(obj[config.field])) {
-		mui.alert(config.message, '提示', '确定');
-		return true
-	}
-	return false
-}
-
-function checkVal(val, config) {
-	if(config.require && !val) {
-		mui.alert(config.require, '提示', '确定');
-		return true;
-	}
-	if(config.pattern && val && !new RegExp(config.pattern).test(val)) {
-		mui.alert(config.msg, '提示', '确定');
-		return true
-	}
-	return false
-}
-
 function goUrl(Selector, url) {
 	mui('body').off('tap', Selector);
 	mui('body').on('tap', Selector, function() {
@@ -100,8 +94,4 @@ function goUrl(Selector, url) {
 			location.href = url(this)
 		}
 	})
-}
-
-function getDesc(str, size) {
-	return str.replace(/<!--[\w\W\r\n]*?-->/gmi, '').replace(/<[^>]+>/g, "").substr(0, size || 100);
 }
