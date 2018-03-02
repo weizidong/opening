@@ -16,7 +16,7 @@
 			.mui-card-content {
 				padding-top: 50px;
 				padding-bottom: 50px;
-				font-size: 24px;
+				font-size: 20px;
 			}
 			
 			.mui-input-row label {
@@ -48,10 +48,12 @@
 						<label>认筹号：</label>
 						<div>17683701650</div>
 					</div>
-					<div class="mui-input-row"><label>成交单位：</label>
+					<div class="mui-input-row">
+						<label>成交单位：</label>
 						<div>一号楼1-101</div>
 					</div>
-					<div class="mui-input-row"><label>销控时间：</label>
+					<div class="mui-input-row">
+						<label>销控时间：</label>
 						<div>2018-03-01 12:23:59</div>
 					</div>
 				</div>
@@ -72,8 +74,12 @@
 			</nav>
 		</div>
 		<script src="js/mui.min.js"></script>
+		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init()
+			goUrl('.mui-bar .mui-tab-item', function(that) {
+				return that.getAttribute('href')
+			})
 		</script>
 	</body>
 

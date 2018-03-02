@@ -44,19 +44,19 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!-- 配置微信鉴权oAuth2Filter过滤器 -->
-    <filter>
-        <filter-name>oAuth2Filter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <!-- 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理 -->
-            <param-name>targetFilterLifecycle</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>oAuth2Filter</filter-name>
-        <url-pattern>/wechatpage/*</url-pattern>
-    </filter-mapping>
+    <!--<filter>-->
+        <!--<filter-name>oAuth2Filter</filter-name>-->
+        <!--<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>-->
+        <!--<init-param>-->
+            <!--&lt;!&ndash; 该值缺省为false,表示生命周期由SpringApplicationContext管理,设置为true则表示由ServletContainer管理 &ndash;&gt;-->
+            <!--<param-name>targetFilterLifecycle</param-name>-->
+            <!--<param-value>true</param-value>-->
+        <!--</init-param>-->
+    <!--</filter>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>oAuth2Filter</filter-name>-->
+        <!--<url-pattern>/wechatpage/*</url-pattern>-->
+    <!--</filter-mapping>-->
     <!-- 微信消息拦截器 -->
     <filter>
         <filter-name>wechatFilter</filter-name>
