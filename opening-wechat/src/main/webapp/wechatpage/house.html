@@ -61,8 +61,9 @@
 			}
 			
 			.mui-bar .mui-title {
-				left: 0;
+				left: 10px;
 				right: 0;
+				text-align: left;
 			}
 			
 			.mui-card {
@@ -89,11 +90,33 @@
 			.mui-popup {
 				width: 300px;
 			}
+			
+			.plan_map {
+				display: none;
+				position: fixed;
+				z-index: 999;
+				height: 100%;
+				width: 100%;
+			}
+			
+			.plan_map img {
+				max-height: 100%;
+				max-width: 100%;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				-ms-transform: translate(-50%, -50%);
+				-moz-transform: translate(-50%, -50%);
+				-webkit-transform: translate(-50%, -50%);
+				-o-transform: translate(-50%, -50%);
+			}
 		</style>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
+			<a class="mui-icon mui-icon-map mui-pull-right" id="plan_map"></a>
 			<h1 class="mui-title"><span class="mui-icon mui-icon-chatboxes"></span>距离选房开始还有：<span class="red">1天1小时15分59秒</span></h1>
 		</header>
 		<div class="mui-slider">
@@ -697,6 +720,9 @@
 				<span class="mui-tab-label">我的</span>
 			</a>
 		</nav>
+		<div class="plan_map">
+			<img src="img/plan_map.jpg" />
+		</div>
 		<script src="js/mui.min.js"></script>
 		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
@@ -770,6 +796,14 @@
 							}, 'div')
 					}, 'div')
 				goUrl('#agreementHtml', 'agreement.html')
+			})
+			mui('body').on('tap', '#plan_map', function() {
+				var mask = mui.createMask(function() {
+					mui('.plan_map')[0].style.display = 'none'
+					mask.close()
+				})
+				mask.show()
+				mui('.plan_map')[0].style.display = 'block'
 			})
 		</script>
 	</body>
