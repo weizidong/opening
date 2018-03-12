@@ -1,9 +1,8 @@
 function ajax(url, config) {
 	config = config || {};
-	log('请求:', url)
-	log('方式:', config.type || 'POST')
-	log('参数:', config.data)
-	url = 'http://127.0.0.1:8080' + url + '?ACCESS_TOKEN=1'
+	console.log('请求:', url)
+	console.log('方式:', config.type || 'POST')
+	console.log('参数:', config.data)
 	mui.ajax(url, {
 		data: config.data,
 		dataType: 'json', //服务器返回json格式数据
@@ -20,12 +19,12 @@ function ajax(url, config) {
 				data = JSON.parse(data);
 			}
 			if(data.code !== 200) {
-				log('错误:', data)
+				console.log('错误:', data)
 				mui.alert(data.msg, '提示', '确定', function() {
 					config.error && config.error();
 				})
 			} else {
-				log('结果:', data.data)
+				console.log('结果:', data.data)
 				config.success && config.success(data.data);
 			}
 		},
@@ -36,24 +35,6 @@ function ajax(url, config) {
 			config.error && config.error();
 		}
 	});
-}
-
-function log() {
-	if(!arguments || arguments.length < 1) {
-		console.log(arguments)
-	} else {
-		var str = ''
-		for(var k in arguments) {
-			str += toStr(arguments[k])
-		}
-		console.log(str)
-	}
-}
-
-function toStr(obj) {
-	if(typeof(obj) == "object")
-		return JSON.stringify(obj)
-	return obj
 }
 
 function getQuery() {

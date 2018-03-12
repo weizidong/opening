@@ -4,8 +4,6 @@ import com.weizidong.model.dao.UserDao;
 import com.weizidong.model.entity.User;
 import com.weizidong.utils.WechatConfigs;
 import org.apache.commons.lang3.StringUtils;
-import org.restful.api.filter.exception.ResponseCode;
-import org.restful.api.filter.exception.WebException;
 import org.restful.api.session.SessionUtil;
 import org.restful.api.utils.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +31,7 @@ public class UserService {
      * @date 2018/2/8 16:22
      */
     public boolean check(String openid) {
-        if (StringUtils.isBlank(openid)) {
-            throw new WebException(ResponseCode.参数错误.getCode(), "openid 不能为空！");
-        }
+        Assert.isFalse(StringUtils.isBlank(openid), "openid 不能为空！");
         return userDao.check(openid);
     }
 
@@ -59,9 +55,7 @@ public class UserService {
      * @date 2018/2/9 10:57
      */
     public void updateByOpenId(User u) {
-        if (StringUtils.isBlank(u.getOpenid())) {
-            throw new WebException(ResponseCode.参数错误.getCode(), "openid 不能为空！");
-        }
+        Assert.isFalse(StringUtils.isBlank(u.getOpenid()), "openid 不能为空！");
         userDao.updateByOpenId(u);
     }
 
@@ -72,9 +66,7 @@ public class UserService {
      * @return 用户信息
      */
     public User getByOpenId(String openid) {
-        if (StringUtils.isBlank(openid)) {
-            throw new WebException(ResponseCode.参数错误.getCode(), "openid 不能为空！");
-        }
+        Assert.isFalse(StringUtils.isBlank(openid), "openid 不能为空！");
         return userDao.getByOpenId(openid);
     }
 

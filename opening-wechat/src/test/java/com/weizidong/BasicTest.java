@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
-@Transactional(transactionManager = "transactionManager")
-@Rollback
+//@Transactional(transactionManager = "transactionManager")
+//@Rollback
 public class BasicTest {
 
     @After

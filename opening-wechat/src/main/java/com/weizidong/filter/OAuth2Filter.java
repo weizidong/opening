@@ -38,6 +38,11 @@ public class OAuth2Filter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         // 获取访问请求
         String requestUrl = httpRequest.getRequestURI() + (httpRequest.getQueryString() != null ? "?" + httpRequest.getQueryString() : "");
+        // 判断是否是静态文件
+        if (StringUtils.startsWithAny(requestUrl, new String[]{"/wechatpage/img/", "/wechatpage/js/", "/wechatpage/fonts/", "/wechatpage/css/"})) {
+            chain.doFilter(request, response);
+            return;
+        }
         LoggerUtils.debug(getClass(), "请求:" + requestUrl);
         // 判断是否已登录
         Session session = SessionUtil.getSession(httpRequest);
@@ -53,6 +58,11 @@ public class OAuth2Filter implements Filter {
             // 开启debug模式
             token = httpRequest.getParameter(DEBUG_FLAG);
             LoggerUtils.debug(getClass(), "开启debug模式！\t" + "token：" + token);
+            User user = new User();
+            user.setOpenid(token);
+            SessionUtil.save(httpResponse, token, user);
+            chain.doFilter(request, response);
+            return;
         }
         // 尝试登陆
         if (StringUtils.isNotBlank(token)) {

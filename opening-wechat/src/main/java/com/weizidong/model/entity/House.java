@@ -16,7 +16,7 @@ public class House implements Serializable {
      * 楼栋号
      */
     @Column(name = "building_no")
-    private String buildingNo;
+    private Integer buildingNo;
 
     /**
      * 楼层
@@ -28,7 +28,7 @@ public class House implements Serializable {
      * 房号
      */
     @Column(name = "room_no")
-    private Integer roomNo;
+    private String roomNo;
 
     /**
      * 认筹者ID
@@ -47,6 +47,28 @@ public class House implements Serializable {
      */
     @Column(name = "sales_time")
     private Date salesTime;
+
+    /**
+     * 建筑面积
+     */
+    private Double area;
+
+    /**
+     * 单价
+     */
+    @Column(name = "unit_price")
+    private Double unitPrice;
+
+    /**
+     * 总价
+     */
+    @Column(name = "total_price")
+    private Double totalPrice;
+
+    /**
+     * 状态：0、未售，1、已售，2、未推
+     */
+    private Integer status;
 
     private static final long serialVersionUID = 1L;
 
@@ -73,7 +95,7 @@ public class House implements Serializable {
      *
      * @return building_no - 楼栋号
      */
-    public String getBuildingNo() {
+    public Integer getBuildingNo() {
         return buildingNo;
     }
 
@@ -82,7 +104,7 @@ public class House implements Serializable {
      *
      * @param buildingNo 楼栋号
      */
-    public void setBuildingNo(String buildingNo) {
+    public void setBuildingNo(Integer buildingNo) {
         this.buildingNo = buildingNo;
     }
 
@@ -109,7 +131,7 @@ public class House implements Serializable {
      *
      * @return room_no - 房号
      */
-    public Integer getRoomNo() {
+    public String getRoomNo() {
         return roomNo;
     }
 
@@ -118,7 +140,7 @@ public class House implements Serializable {
      *
      * @param roomNo 房号
      */
-    public void setRoomNo(Integer roomNo) {
+    public void setRoomNo(String roomNo) {
         this.roomNo = roomNo;
     }
 
@@ -176,6 +198,78 @@ public class House implements Serializable {
         this.salesTime = salesTime;
     }
 
+    /**
+     * 获取建筑面积
+     *
+     * @return area - 建筑面积
+     */
+    public Double getArea() {
+        return area;
+    }
+
+    /**
+     * 设置建筑面积
+     *
+     * @param area 建筑面积
+     */
+    public void setArea(Double area) {
+        this.area = area;
+    }
+
+    /**
+     * 获取单价
+     *
+     * @return unit_price - 单价
+     */
+    public Double getUnitPrice() {
+        return unitPrice;
+    }
+
+    /**
+     * 设置单价
+     *
+     * @param unitPrice 单价
+     */
+    public void setUnitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    /**
+     * 获取总价
+     *
+     * @return total_price - 总价
+     */
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    /**
+     * 设置总价
+     *
+     * @param totalPrice 总价
+     */
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    /**
+     * 获取状态：0、未售，1、已售，2、未推
+     *
+     * @return status - 状态：0、未售，1、已售，2、未推
+     */
+    public Integer getStatus() {
+        return status;
+    }
+
+    /**
+     * 设置状态：0、未售，1、已售，2、未推
+     *
+     * @param status 状态：0、未售，1、已售，2、未推
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -189,6 +283,10 @@ public class House implements Serializable {
         sb.append(", userId=").append(userId);
         sb.append(", houseType=").append(houseType);
         sb.append(", salesTime=").append(salesTime);
+        sb.append(", area=").append(area);
+        sb.append(", unitPrice=").append(unitPrice);
+        sb.append(", totalPrice=").append(totalPrice);
+        sb.append(", status=").append(status);
         sb.append("]");
         return sb.toString();
     }
@@ -211,7 +309,11 @@ public class House implements Serializable {
             && (this.getRoomNo() == null ? other.getRoomNo() == null : this.getRoomNo().equals(other.getRoomNo()))
             && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
             && (this.getHouseType() == null ? other.getHouseType() == null : this.getHouseType().equals(other.getHouseType()))
-            && (this.getSalesTime() == null ? other.getSalesTime() == null : this.getSalesTime().equals(other.getSalesTime()));
+            && (this.getSalesTime() == null ? other.getSalesTime() == null : this.getSalesTime().equals(other.getSalesTime()))
+            && (this.getArea() == null ? other.getArea() == null : this.getArea().equals(other.getArea()))
+            && (this.getUnitPrice() == null ? other.getUnitPrice() == null : this.getUnitPrice().equals(other.getUnitPrice()))
+            && (this.getTotalPrice() == null ? other.getTotalPrice() == null : this.getTotalPrice().equals(other.getTotalPrice()))
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()));
     }
 
     @Override
@@ -225,6 +327,10 @@ public class House implements Serializable {
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         result = prime * result + ((getHouseType() == null) ? 0 : getHouseType().hashCode());
         result = prime * result + ((getSalesTime() == null) ? 0 : getSalesTime().hashCode());
+        result = prime * result + ((getArea() == null) ? 0 : getArea().hashCode());
+        result = prime * result + ((getUnitPrice() == null) ? 0 : getUnitPrice().hashCode());
+        result = prime * result + ((getTotalPrice() == null) ? 0 : getTotalPrice().hashCode());
+        result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         return result;
     }
 }
