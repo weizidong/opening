@@ -91,6 +91,14 @@
 				width: 300px;
 			}
 			
+			#plan_map {
+				position: fixed;
+				bottom: 55px;
+				right: 15px;
+				box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+				border-radius: 50%;
+			}
+			
 			.plan_map {
 				display: none;
 				position: fixed;
@@ -117,91 +125,17 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-icon mui-icon-map mui-pull-right" id="plan_map"></a>
-			<h1 class="mui-title"><span class="mui-icon mui-icon-chatboxes"></span>距离选房开始还有：<span class="red">1天1小时15分59秒</span></h1>
+			<h1 class="mui-title"><span class="mui-icon mui-icon-chatboxes"></span>距离选房开始还有：<span class="red" id="time">0天0小时0分0秒</span></h1>
 		</header>
 		<div class="mui-slider">
 			<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
 			</div>
 			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-3"></div>
 			<div class="mui-slider-group">
-				<div id="item1" class="mui-slider-item mui-control-content mui-active">
+				<div id="item1" class="mui-slider-item mui-control-content">
 					<div class="mui-scroll-wrapper">
 						<div class="mui-scroll">
-							<ul class="mui-table-view">
-								<li class="mui-table-view-cell mui-row">
-									<div class="floor mui-badge">
-										1F
-									</div>
-									<div class="mui-col-xs-4 mui-col-sm-4">
-										<div class="mui-card">
-											<span class="mui-badge mui-badge-purple">已售</span>
-											<div class="house mui-card-content mui-badge-danger">
-												<div>房号：1101</div>
-												<div>建筑面积：100㎡</div>
-												<div>单价：1万</div>
-												<div>总价：100万</div>
-											</div>
-										</div>
-									</div>
-									<div class="mui-col-xs-4 mui-col-sm-4">
-										<div class="mui-card">
-											<span class="mui-badge mui-badge-primary">未售</span>
-											<div class="house mui-card-content mui-badge-green">
-												<div>房号：1102</div>
-												<div>建筑面积：100㎡</div>
-												<div>单价：1万</div>
-												<div>总价：100万</div>
-											</div>
-										</div>
-									</div>
-									<div class="mui-col-xs-4 mui-col-sm-4">
-										<div class="mui-card">
-											<span class="mui-badge">未推</span>
-											<div class="house mui-card-content">
-												<div>房号：1103</div>
-												<div>建筑面积：100㎡</div>
-												<div>单价：1万</div>
-												<div>总价：100万</div>
-											</div>
-										</div>
-									</div>
-									<div class="mui-col-xs-4 mui-col-sm-4">
-										<div class="mui-card">
-											<span class="mui-badge mui-badge-blue">未售</span>
-											<div class="house mui-card-content mui-badge-green">
-												<div>房号：1104</div>
-												<div>建筑面积：100㎡</div>
-												<div>单价：1万</div>
-												<div>总价：100万</div>
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div id="item2" class="mui-slider-item mui-control-content">
-					<div class="mui-scroll-wrapper">
-						<div class="mui-scroll">
-							<ul class="mui-table-view">
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div id="item3" class="mui-slider-item mui-control-content">
-					<div class="mui-scroll-wrapper">
-						<div class="mui-scroll">
-							<ul class="mui-table-view">
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div id="item4" class="mui-slider-item mui-control-content">
-					<div class="mui-scroll-wrapper">
-						<div class="mui-scroll">
-							<ul class="mui-table-view">
-							</ul>
+							<ul class="mui-table-view"></ul>
 						</div>
 					</div>
 				</div>
@@ -225,12 +159,9 @@
 			<img src="img/plan_map.jpg" />
 		</div>
 		<script src="js/mui.min.js"></script>
+		<script src="js/moment.min.js"></script>
 		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
-			mui.init()
-			mui('.mui-scroll-wrapper').scroll({
-				deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-			})
 			goUrl('.mui-bar .mui-tab-item', function(that) {
 				return that.getAttribute('href')
 			})
@@ -306,21 +237,59 @@
 				mask.show()
 				mui('.plan_map')[0].style.display = 'block'
 			})
+			// 获取开始时间
+			var timmer;
+			ajax('/rest/system/get/START_TIME', {
+				type: 'GET',
+				success: function(time) {
+					setTime(time)
+				}
+			})
+
+			function setTime(time) {
+				var now = new Date().getTime()
+				if(now >= time) {
+					timmer && clearInterval(timmer)
+					mui('#time')[0].innerText = '本次选房已开始...'
+					return
+				}
+				var d = moment(time).diff(now, 'days')
+				if(d > 5) {
+					mui('#time')[0].innerText = moment(time).format('MM月DD号 HH:mm:ss开始')
+					return
+				}
+				var h = moment(time).diff(now, 'hours') - d * 24
+				var m = moment(time).diff(now, 'minutes') - d * 24 * 60 - h * 60
+				var s = moment(time).diff(now, 'seconds') - d * 24 * 60 * 60 - h * 60 * 60 - m * 60
+				mui('#time')[0].innerText = d + '天' + h + '小时' + m + '分' + s + '秒'
+				if(!timmer) {
+					timmer = setInterval(function() {
+						setTime(time)
+					}, 1000)
+				}
+			}
 			// 获取楼栋号
 			ajax('/rest/house/getBuilding', {
 				type: 'GET',
 				success: function(data) {
 					var html = ''
+					var html2 = ''
 					data.forEach(function(i) {
 						html += '<a class="mui-control-item" href="#item' + i + '" tid="' + i + '">' + i + '号楼</a>'
+						html2 += '<div id="item' + i + '" class="mui-slider-item mui-control-content"><div class="mui-scroll-wrapper"><div class="mui-scroll"><ul class="mui-table-view"></ul></div></div></div>'
 					})
 					mui('.mui-slider .mui-slider-indicator')[0].innerHTML = html
+					mui('.mui-slider-group')[0].innerHTML = html2
+					mui.init()
+					mui('.mui-scroll-wrapper').scroll({
+						deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+					})
 					find(data[0])
 				}
 			})
 
 			function find(tid) {
-				var mask = mui.createMask();//callback为用户点击蒙版时自动执行的回调；
+				var mask = mui.createMask(); //callback为用户点击蒙版时自动执行的回调；
 				mask.show()
 				ajax('/rest/house/find/' + tid, {
 					type: 'GET',
@@ -338,8 +307,8 @@
 							html += '<li class="mui-table-view-cell mui-row"><div class="floor mui-badge">' + k + 'F</div>'
 							list[k].forEach(function(item) {
 								html += '<div class="mui-col-xs-4 mui-col-sm-4"><div class="mui-card">' +
-									'<span class="mui-badge mui-badge-purple">' + (item.userId ? '已售' : '未售') + '</span>' +
-									'<div class="house mui-card-content mui-badge-danger">' +
+									'<span class="mui-badge ' + (['mui-badge-primary', 'mui-badge-purple', ''][item.status]) + '">' + (['未售', '已售', '未推'][item.status]) + '</span>' +
+									'<div class="house mui-card-content ' + (['mui-badge-green', 'mui-badge-danger', ''][item.status]) + '">' +
 									'<div>房号：' + item.roomNo + '</div>' +
 									'<div>面积：' + item.area + '㎡</div>' +
 									'<div>单价：' + item.unitPrice + '元</div>' +
