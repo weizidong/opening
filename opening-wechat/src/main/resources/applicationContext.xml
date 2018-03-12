@@ -70,6 +70,8 @@
     <context:component-scan base-package="com.weizidong"/>
     <!-- 微信消息拦截器 -->
     <bean id="wechatFilter" class="com.weizidong.filter.WechatFilter"/>
+    <!-- 微信鉴权过滤器 -->
+    <bean id="oAuth2Filter" class="com.weizidong.filter.OAuth2Filter"/>
     <!-- 对事务进行代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <!-- 配置事务管理器 -->

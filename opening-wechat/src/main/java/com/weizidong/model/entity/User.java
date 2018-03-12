@@ -9,10 +9,6 @@ import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * @author 魏自东
- * @date 2018/2/8 15:57
- */
 public class User implements Serializable {
     /**
      * ID
@@ -98,6 +94,33 @@ public class User implements Serializable {
      * 0：未删除，1：已删除
      */
     private Integer deleted;
+
+    /**
+     * 电话
+     */
+    private String phone;
+
+    /**
+     * 身份证号码
+     */
+    @Column(name = "id_number")
+    private String idNumber;
+
+    /**
+     * 真实姓名
+     */
+    private String name;
+
+    /**
+     * 家庭住址
+     */
+    private String address;
+
+    /**
+     * 录入人
+     */
+    @Column(name = "admin_id")
+    private Integer adminId;
 
     private static final long serialVersionUID = 1L;
 
@@ -389,6 +412,96 @@ public class User implements Serializable {
         this.deleted = deleted;
     }
 
+    /**
+     * 获取电话
+     *
+     * @return phone - 电话
+     */
+    public String getPhone() {
+        return phone;
+    }
+
+    /**
+     * 设置电话
+     *
+     * @param phone 电话
+     */
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    /**
+     * 获取身份证号码
+     *
+     * @return id_number - 身份证号码
+     */
+    public String getIdNumber() {
+        return idNumber;
+    }
+
+    /**
+     * 设置身份证号码
+     *
+     * @param idNumber 身份证号码
+     */
+    public void setIdNumber(String idNumber) {
+        this.idNumber = idNumber;
+    }
+
+    /**
+     * 获取真实姓名
+     *
+     * @return name - 真实姓名
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * 设置真实姓名
+     *
+     * @param name 真实姓名
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 获取家庭住址
+     *
+     * @return address - 家庭住址
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * 设置家庭住址
+     *
+     * @param address 家庭住址
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
+     * 获取录入人
+     *
+     * @return admin_id - 录入人
+     */
+    public Integer getAdminId() {
+        return adminId;
+    }
+
+    /**
+     * 设置录入人
+     *
+     * @param adminId 录入人
+     */
+    public void setAdminId(Integer adminId) {
+        this.adminId = adminId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -411,6 +524,11 @@ public class User implements Serializable {
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", deleted=").append(deleted);
+        sb.append(", phone=").append(phone);
+        sb.append(", idNumber=").append(idNumber);
+        sb.append(", name=").append(name);
+        sb.append(", address=").append(address);
+        sb.append(", adminId=").append(adminId);
         sb.append("]");
         return sb.toString();
     }
@@ -442,7 +560,12 @@ public class User implements Serializable {
                 && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
                 && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
                 && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-                && (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()));
+                && (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()))
+                && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
+                && (this.getIdNumber() == null ? other.getIdNumber() == null : this.getIdNumber().equals(other.getIdNumber()))
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
+                && (this.getAdminId() == null ? other.getAdminId() == null : this.getAdminId().equals(other.getAdminId()));
     }
 
     @Override
@@ -465,6 +588,11 @@ public class User implements Serializable {
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getDeleted() == null) ? 0 : getDeleted().hashCode());
+        result = prime * result + ((getPhone() == null) ? 0 : getPhone().hashCode());
+        result = prime * result + ((getIdNumber() == null) ? 0 : getIdNumber().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getAddress() == null) ? 0 : getAddress().hashCode());
+        result = prime * result + ((getAdminId() == null) ? 0 : getAdminId().hashCode());
         return result;
     }
 

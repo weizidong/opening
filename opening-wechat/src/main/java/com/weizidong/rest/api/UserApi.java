@@ -6,10 +6,7 @@ import org.restful.api.session.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -30,5 +27,33 @@ public class UserApi {
     @Path("/get")
     public User get(@Context HttpServletRequest request) {
         return SessionUtil.getUser(request, User.class);
+    }
+
+    @GET
+    @Path("/get/{id}")
+    public User getById(@PathParam("id") Integer id) {
+        return userService.getById(id);
+    }
+
+    /**
+     * 创建用户，并获取临时二维码
+     *
+     * @param user    用户
+     * @param request request
+     * @return 二维码地址
+     */
+    @POST
+    @Path("/create")
+    public String create(User user, @Context HttpServletRequest request) {
+        return userService.create(user);
+    }
+
+    @POST
+    @Path("/bind")
+    public void bind(User user, @Context HttpServletRequest request) {
+        User db = SessionUtil.getUser(request, User.class);
+        db.setIdNumber(user.getIdNumber());
+        db.setId(user.getId());
+        userService.bind(db);
     }
 }

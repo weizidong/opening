@@ -1,0 +1,777 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>房源信息</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-bottom {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+			}
+			
+			.red {
+				color: red;
+			}
+			
+			.mui-table-view-cell {
+				padding: 0;
+				padding-top: 25px;
+			}
+			
+			.mui-table-view-cell:not(:last-child) {
+				box-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+			}
+			
+			.mui-card {
+				margin: 5px;
+			}
+			
+			.house {
+				padding: 8px;
+			}
+			
+			.floor {
+				top: 15px !important;
+				left: 5px;
+				right: auto !important;
+				z-index: 9;
+				font-size: 18px;
+			}
+			
+			.mui-slider {
+				position: fixed;
+				top: 44px;
+				bottom: 50px;
+				width: 100%;
+			}
+			
+			.mui-slider-group {
+				position: absolute !important;
+				bottom: 0;
+				top: 40px;
+				width: 100%;
+			}
+			
+			.mui-table-view-cell.mui-active {
+				background: none;
+			}
+			
+			.mui-bar .mui-title {
+				left: 0;
+				right: 0;
+			}
+			
+			.mui-card {
+				overflow: visible;
+			}
+			
+			.mui-badge {
+				position: absolute;
+				right: -5px;
+				top: -5px;
+				z-index: 3;
+			}
+			
+			.mui-input-row div {
+				font-family: 'Helvetica Neue', Helvetica, sans-serif;
+				line-height: 1.1;
+				padding: 11px 15px;
+			}
+			
+			.mui-input-row:not(.mui-radio) label {
+				width: 40%;
+			}
+			
+			.mui-popup {
+				width: 300px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title"><span class="mui-icon mui-icon-chatboxes"></span>距离选房开始还有：<span class="red">1天1小时15分59秒</span></h1>
+		</header>
+		<div class="mui-slider">
+			<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+				<a class="mui-control-item" href="#item1">1号楼</a>
+				<a class="mui-control-item" href="#item2">2号楼</a>
+				<a class="mui-control-item" href="#item3">3号楼</a>
+				<a class="mui-control-item" href="#item4">4号楼</a>
+			</div>
+			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-3"></div>
+			<div class="mui-slider-group">
+				<div id="item1" class="mui-slider-item mui-control-content mui-active">
+					<div class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell mui-row">
+									<div class="floor mui-badge">
+										1F
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<span class="mui-badge mui-badge-purple">已售</span>
+											<div class="house mui-card-content mui-badge-danger">
+												<div>房号：1101</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<span class="mui-badge mui-badge-primary">未售</span>
+											<div class="house mui-card-content mui-badge-green">
+												<div>房号：1102</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<span class="mui-badge">未推</span>
+											<div class="house mui-card-content">
+												<div>房号：1103</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<span class="mui-badge mui-badge-blue">未售</span>
+											<div class="house mui-card-content mui-badge-green">
+												<div>房号：1104</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="mui-table-view-cell mui-row">
+									<div class="floor mui-badge">
+										2F
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：1201</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：1202</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：1203</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：1204</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="mui-table-view-cell mui-row">
+									<div class="floor mui-badge">
+										3F
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：1301</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：1302</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：1303</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：1304</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="item2" class="mui-slider-item mui-control-content">
+					<div class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell mui-row">
+									<div class="floor mui-badge">
+										1F
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：2101</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：2102</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：2103</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：2104</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="mui-table-view-cell mui-row">
+									<div class="floor mui-badge">
+										2F
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：2201</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：2202</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：2203</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：2204</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="mui-table-view-cell mui-row">
+									<div class="floor mui-badge">
+										3F
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：2301</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：2302</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：2303</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：2304</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="item3" class="mui-slider-item mui-control-content">
+					<div class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell mui-row">
+									<div class="floor mui-badge">
+										1F
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：3101</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：3102</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：3103</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：3104</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="mui-table-view-cell mui-row">
+									<div class="floor mui-badge">
+										2F
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：3201</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：3202</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：3203</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：3204</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="mui-table-view-cell mui-row">
+									<div class="floor mui-badge">
+										3F
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：3301</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：3302</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：3303</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：3304</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div id="item4" class="mui-slider-item mui-control-content">
+					<div class="mui-scroll-wrapper">
+						<div class="mui-scroll">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell mui-row">
+									<div class="floor mui-badge">
+										1F
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：4101</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：4102</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：4103</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：4104</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="mui-table-view-cell mui-row">
+									<div class="floor mui-badge">
+										2F
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：4201</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：4202</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：4203</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：4204</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+								</li>
+								<li class="mui-table-view-cell mui-row">
+									<div class="floor mui-badge">
+										3F
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：4301</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：4302</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：4303</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+									<div class="mui-col-xs-4 mui-col-sm-4">
+										<div class="mui-card">
+											<div class="house mui-card-content">
+												<div>房号：4304</div>
+												<div>建筑面积：100㎡</div>
+												<div>单价：1万</div>
+												<div>总价：100万</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" href="house.html">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">房源</span>
+			</a>
+			<a class="mui-tab-item" href="favorite.html">
+				<span class="mui-icon mui-icon-email"></span>
+				<span class="mui-tab-label">收藏</span>
+			</a>
+			<a class="mui-tab-item" href="me.html">
+				<span class="mui-icon mui-icon-person"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+		<script src="js/mui.min.js"></script>
+		<script src="js/app.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init()
+			mui('.mui-scroll-wrapper').scroll({
+				deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+			})
+			goUrl('.mui-bar .mui-tab-item', function(that) {
+				return that.getAttribute('href')
+			})
+			mui('.mui-table-view-cell').on('tap', '.mui-card', function() {
+				mui.confirm('<div class="mui-text-left">\
+								<div class="mui-input-row">\
+									<label>房号：</label>\
+									<div>1号楼1-101 </div>\
+								</div>\
+								<div class="mui-input-row">\
+									<label>户型图：</label>\
+									<div>户型 </div>\
+								</div>\
+								<div class="mui-input-row">\
+									<label>户型：</label>\
+									<div>三室两厅 </div>\
+								</div>\
+								<div class="mui-input-row">\
+									<label>状态：</label>\
+									<div>未售 </div>\
+								</div>\
+								<div class="mui-input-row">\
+									<label>单价：</label>\
+									<div>1万元 </div>\
+								</div>\
+								<div class="mui-input-row">\
+									<label>面积：</label>\
+									<div>100㎡ </div>\
+								</div>\
+								<div class="mui-input-row">\
+									<label>总价：</label>\
+									<div>100万 </div>\
+								</div>\
+								<div class="mui-input-row">\
+									<label>总价：</label>\
+									<div>100万 </div>\
+								</div>\
+								<div class="mui-input-row mui-radio mui-left">\
+									<label for="agreement">本人已阅读并同意<a href="agreement.html" id="agreementHtml">微信选房协议</a></label>\
+									<input name="agreement" id="agreement" type="radio">\
+								</div> \
+							</div>', '房产信息', ['取消认购', '确认认购'],
+					function(e) {
+						mui.alert('<div class="mui-text-left">\
+									<div class="mui-input-row">\
+										<label>客户名称：</label>\
+										<div>申何健 </div>\
+									</div>\
+									<div class="mui-input-row">\
+										<label>认筹号：</label>\
+										<div>17683701650</div>\
+									</div>\
+									<div class="mui-input-row">\
+										<label>成交单位：</label>\
+										<div>一号楼1-101</div>\
+									</div>\
+									<div class="mui-input-row">\
+										<label>销控时间：</label>\
+										<div>2018-03-01 12:23:59</div>\
+									</div>\
+								</div>', '提示', '确定',
+							function(e) {
+								location.href = 'me.html'
+							}, 'div')
+					}, 'div')
+				goUrl('#agreementHtml', 'agreement.html')
+			})
+		</script>
+	</body>
+
+</html>

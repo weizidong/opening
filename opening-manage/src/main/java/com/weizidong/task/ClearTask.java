@@ -26,7 +26,7 @@ public class ClearTask {
     @Scheduled(cron = "0 0 4 * * ? ")
     public void clearDir() {
         clearDir(PoiExcelUtils.DOWNLOAD_URL);
-        clearDir(QRCodeUtil.RESOURCE_URL);
+//        clearDir(QRCodeUtil.RESOURCE_URL);
     }
 
     /**
