@@ -2,6 +2,7 @@ package com.weizidong.model.dao;
 
 import com.weizidong.model.entity.House;
 import com.weizidong.model.mapper.HouseMapper;
+import com.weizidong.rest.dto.HouseDto;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
@@ -58,5 +59,15 @@ public class HouseDao {
      */
     public List<Integer> getBuilding() {
         return houseMapper.getBuilding();
+    }
+
+    /**
+     * 获取收藏的房源列表
+     *
+     * @param userId 用户Id
+     * @return 收藏的房源列表
+     */
+    public List<HouseDto> getFavorite(Integer userId) {
+        return houseMapper.getFavorite(userId);
     }
 }

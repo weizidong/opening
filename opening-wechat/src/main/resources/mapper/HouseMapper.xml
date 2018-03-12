@@ -23,4 +23,12 @@
         GROUP BY building_no
         ORDER BY building_no
     </select>
+    <resultMap id="HouseDtoMap" type="com.weizidong.rest.dto.HouseDto" extends="BaseResultMap">
+        <result column="count" jdbcType="INTEGER" property="count"/>
+    </resultMap>
+    <select id="getFavorite" resultMap="HouseDtoMap">
+        SELECT h.*,count(house_id) AS `count` FROM favorite f LEFT JOIN house h ON f.house_id = h.id and f.house_id in (
+        SELECT house_id FROM favorite WHERE user_id = #{userId}
+        ) GROUP BY house_id
+    </select>
 </mapper>

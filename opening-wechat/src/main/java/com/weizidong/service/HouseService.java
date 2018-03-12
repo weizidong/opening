@@ -3,6 +3,7 @@ package com.weizidong.service;
 import com.weizidong.model.dao.HouseDao;
 import com.weizidong.model.entity.House;
 import com.weizidong.model.entity.User;
+import com.weizidong.rest.dto.HouseDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,5 +80,14 @@ public class HouseService {
      */
     public List<Integer> getBuilding() {
         return houseDao.getBuilding();
+    }
+
+    /**
+     * 获取我的收藏列表
+     * @param userId 用户ID
+     * @return 收藏的房源列表
+     */
+    public List<HouseDto> getFavorite(Integer userId) {
+        return houseDao.getFavorite(userId);
     }
 }

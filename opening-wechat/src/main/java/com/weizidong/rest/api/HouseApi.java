@@ -2,6 +2,7 @@ package com.weizidong.rest.api;
 
 import com.weizidong.model.entity.House;
 import com.weizidong.model.entity.User;
+import com.weizidong.rest.dto.HouseDto;
 import com.weizidong.service.HouseService;
 import org.restful.api.session.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,12 @@ public class HouseApi {
     public void purchase(@PathParam("houseId") Integer houseId, @Context HttpServletRequest request) {
         User u = SessionUtil.getUser(request, User.class);
         houseService.purchase(houseId, u);
+    }
+
+    @GET
+    @Path("/getFavorite")
+    public List<HouseDto> getFavorite(@Context HttpServletRequest request){
+        User u = SessionUtil.getUser(request, User.class);
+        return houseService.getFavorite(u.getId());
     }
 }
