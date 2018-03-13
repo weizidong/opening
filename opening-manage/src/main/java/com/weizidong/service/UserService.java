@@ -5,13 +5,10 @@ import com.qcdl.model.param.PageParam;
 import com.weizidong.model.dao.UserDao;
 import com.weizidong.model.entity.User;
 import com.weizidong.model.enums.DeleteStatus;
-import org.apache.commons.lang3.StringUtils;
-import org.restful.api.session.SessionUtil;
-import org.restful.api.utils.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.wzd.framwork.utils.PropertiesUtil;
 import org.wzd.framwork.utils.QRCodeUtil;
-import org.wzd.framwork.utils.RegexUtils;
 
 import java.util.Date;
 
@@ -25,25 +22,26 @@ import java.util.Date;
 public class UserService {
     @Autowired
     private UserDao userDao;
+    private static final PropertiesUtil pu = new PropertiesUtil("config.properties");
 
     /**
      * 保存新用户
      *
      * @param user    新用户
      * @param adminId 管理员Id
+     * @return 生成二维码
      * @author 魏自东
      * @date 2018/2/8 16:24
      */
-//    public String create(User u) {
-//        userDao.create(u);
-//        return QRCodeUtil.encode(WechatConfigs.getProperty("wechat.notify_url") + "/wechatpage/bind.html?id=" + u.getId());
-//    }
     public String add(User user, Integer adminId) {
         user.setAdminId(adminId);
         user.setCreateTime(new Date());
         user.setDeleted(DeleteStatus.未删除.getCode());
         userDao.create(user);
-        return QRCodeUtil.encode()
+        String qrcode = QRCodeUtil.encode(pu.getProperty("domain") + "/wechatpage/bind.html?id=" + user.getId());
+        user.setQrcode(qrcode);
+        userDao.updateById(user);
+        return qrcode;
     }
 
     /**

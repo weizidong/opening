@@ -202,7 +202,7 @@
 								<div class="mui-input-row"><label>总价：</label><div>' + (item.totalPrice / 10000) + '万 </div></div>\
 								<div class="mui-input-row"><div class="mui-switch mui-switch-mini" id="mySwitch" style="float: left"><div class="mui-switch-handle"></div></div>\
 								<div>本人已阅读并同意<a href="agreement.html" id="agreementHtml">微信选房协议</a></div></div>\
-							</div>', '房产信息', ['取消', '收藏', '认购'],
+							</div>', '房产信息', ['关闭', '收藏', '认购'],
                 function (e) {
                     if (e.index === 2) {
                         var agree = document.getElementById("mySwitch").classList.contains("mui-active");

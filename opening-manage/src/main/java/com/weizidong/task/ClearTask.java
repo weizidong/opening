@@ -23,10 +23,9 @@ public class ClearTask {
      * @author 魏自东
      * @date 2018/2/7 9:37
      */
-    @Scheduled(cron = "0 0 4 * * ? ")
+//    @Scheduled(cron = "0 0 4 * * ? ")
     public void clearDir() {
         clearDir(PoiExcelUtils.DOWNLOAD_URL);
-//        clearDir(QRCodeUtil.RESOURCE_URL);
     }
 
     /**

@@ -1,12 +1,8 @@
 package com.weizidong.model.entity;
 
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
 
 public class User implements Serializable {
     /**
@@ -56,6 +52,11 @@ public class User implements Serializable {
      * 国家，如中国为CN
      */
     private String country;
+
+    /**
+     * 二维码
+     */
+    private String qrcode;
 
     /**
      * 用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。
@@ -283,6 +284,24 @@ public class User implements Serializable {
      */
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    /**
+     * 获取二维码
+     *
+     * @return qrcode - 二维码
+     */
+    public String getQrcode() {
+        return qrcode;
+    }
+
+    /**
+     * 设置二维码
+     *
+     * @param qrcode 二维码
+     */
+    public void setQrcode(String qrcode) {
+        this.qrcode = qrcode;
     }
 
     /**
@@ -516,6 +535,7 @@ public class User implements Serializable {
         sb.append(", province=").append(province);
         sb.append(", city=").append(city);
         sb.append(", country=").append(country);
+        sb.append(", qrcode=").append(qrcode);
         sb.append(", headimgurl=").append(headimgurl);
         sb.append(", language=").append(language);
         sb.append(", unionid=").append(unionid);
@@ -545,26 +565,27 @@ public class User implements Serializable {
         }
         User other = (User) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getOpenid() == null ? other.getOpenid() == null : this.getOpenid().equals(other.getOpenid()))
-                && (this.getSubscribe() == null ? other.getSubscribe() == null : this.getSubscribe().equals(other.getSubscribe()))
-                && (this.getSubscribeTime() == null ? other.getSubscribeTime() == null : this.getSubscribeTime().equals(other.getSubscribeTime()))
-                && (this.getNickname() == null ? other.getNickname() == null : this.getNickname().equals(other.getNickname()))
-                && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
-                && (this.getProvince() == null ? other.getProvince() == null : this.getProvince().equals(other.getProvince()))
-                && (this.getCity() == null ? other.getCity() == null : this.getCity().equals(other.getCity()))
-                && (this.getCountry() == null ? other.getCountry() == null : this.getCountry().equals(other.getCountry()))
-                && (this.getHeadimgurl() == null ? other.getHeadimgurl() == null : this.getHeadimgurl().equals(other.getHeadimgurl()))
-                && (this.getLanguage() == null ? other.getLanguage() == null : this.getLanguage().equals(other.getLanguage()))
-                && (this.getUnionid() == null ? other.getUnionid() == null : this.getUnionid().equals(other.getUnionid()))
-                && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
-                && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-                && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
-                && (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()))
-                && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
-                && (this.getIdNumber() == null ? other.getIdNumber() == null : this.getIdNumber().equals(other.getIdNumber()))
-                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
-                && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
-                && (this.getAdminId() == null ? other.getAdminId() == null : this.getAdminId().equals(other.getAdminId()));
+            && (this.getOpenid() == null ? other.getOpenid() == null : this.getOpenid().equals(other.getOpenid()))
+            && (this.getSubscribe() == null ? other.getSubscribe() == null : this.getSubscribe().equals(other.getSubscribe()))
+            && (this.getSubscribeTime() == null ? other.getSubscribeTime() == null : this.getSubscribeTime().equals(other.getSubscribeTime()))
+            && (this.getNickname() == null ? other.getNickname() == null : this.getNickname().equals(other.getNickname()))
+            && (this.getSex() == null ? other.getSex() == null : this.getSex().equals(other.getSex()))
+            && (this.getProvince() == null ? other.getProvince() == null : this.getProvince().equals(other.getProvince()))
+            && (this.getCity() == null ? other.getCity() == null : this.getCity().equals(other.getCity()))
+            && (this.getCountry() == null ? other.getCountry() == null : this.getCountry().equals(other.getCountry()))
+            && (this.getQrcode() == null ? other.getQrcode() == null : this.getQrcode().equals(other.getQrcode()))
+            && (this.getHeadimgurl() == null ? other.getHeadimgurl() == null : this.getHeadimgurl().equals(other.getHeadimgurl()))
+            && (this.getLanguage() == null ? other.getLanguage() == null : this.getLanguage().equals(other.getLanguage()))
+            && (this.getUnionid() == null ? other.getUnionid() == null : this.getUnionid().equals(other.getUnionid()))
+            && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
+            && (this.getDeleted() == null ? other.getDeleted() == null : this.getDeleted().equals(other.getDeleted()))
+            && (this.getPhone() == null ? other.getPhone() == null : this.getPhone().equals(other.getPhone()))
+            && (this.getIdNumber() == null ? other.getIdNumber() == null : this.getIdNumber().equals(other.getIdNumber()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getAddress() == null ? other.getAddress() == null : this.getAddress().equals(other.getAddress()))
+            && (this.getAdminId() == null ? other.getAdminId() == null : this.getAdminId().equals(other.getAdminId()));
     }
 
     @Override
@@ -580,6 +601,7 @@ public class User implements Serializable {
         result = prime * result + ((getProvince() == null) ? 0 : getProvince().hashCode());
         result = prime * result + ((getCity() == null) ? 0 : getCity().hashCode());
         result = prime * result + ((getCountry() == null) ? 0 : getCountry().hashCode());
+        result = prime * result + ((getQrcode() == null) ? 0 : getQrcode().hashCode());
         result = prime * result + ((getHeadimgurl() == null) ? 0 : getHeadimgurl().hashCode());
         result = prime * result + ((getLanguage() == null) ? 0 : getLanguage().hashCode());
         result = prime * result + ((getUnionid() == null) ? 0 : getUnionid().hashCode());
@@ -594,5 +616,4 @@ public class User implements Serializable {
         result = prime * result + ((getAdminId() == null) ? 0 : getAdminId().hashCode());
         return result;
     }
-
 }
