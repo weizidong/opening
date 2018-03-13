@@ -22,7 +22,7 @@ import java.util.Date;
 public class UserService {
     @Autowired
     private UserDao userDao;
-    private static final PropertiesUtil pu = new PropertiesUtil("config.properties");
+    private static PropertiesUtil pu = new PropertiesUtil("/configs/config.properties");
 
     /**
      * 保存新用户
@@ -38,7 +38,7 @@ public class UserService {
         user.setCreateTime(new Date());
         user.setDeleted(DeleteStatus.未删除.getCode());
         userDao.create(user);
-        String qrcode = QRCodeUtil.encode(pu.getProperty("domain") + "/wechatpage/bind.html?id=" + user.getId());
+        String qrcode = pu.getProperty("domain") + QRCodeUtil.encode(pu.getProperty("wechat") + "/wechatpage/bind.html?id=" + user.getId());
         user.setQrcode(qrcode);
         userDao.updateById(user);
         return qrcode;
