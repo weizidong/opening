@@ -1,0 +1,52 @@
+.mui-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.mui-bar .mui-title {
+    left: 0;
+    right: 0;
+}
+
+.mui-badge {
+    font-size: 16px;
+    padding: 8px 16px;
+}
+
+#refreshContainer {
+    position: fixed;
+    top: 44px;
+    bottom: 50px;
+    width: 100%;
+}
+
+.mui-input-row div {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    line-height: 1.1;
+    padding: 11px 15px;
+}
+
+.mui-input-row:not(.mui-radio) label {
+    width: 40%;
+}
+
+.mui-popup {
+    width: 300px;
+}
+
+.btn1 {
+    top: 30% !important;
+}
+
+.btn2 {
+    top: 70% !important;
+}

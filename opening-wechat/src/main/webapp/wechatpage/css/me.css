@@ -1,0 +1,21 @@
+.head-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+}
+
+.mui-card-content {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 20px;
+}
+
+.mui-input-row label {
+    width: 40%;
+}
+
+.mui-input-row div {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    line-height: 1.1;
+    padding: 11px 15px;
+}

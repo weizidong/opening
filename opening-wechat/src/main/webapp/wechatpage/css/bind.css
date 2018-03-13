@@ -1,0 +1,33 @@
+.mui-content {
+    background: url(img/bg-01.jpg) no-repeat;
+    background-size: 100% 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.mui-input-group {
+    position: absolute;
+    width: 100%;
+    background: rgba(0, 0, 0, .7);
+    bottom: 0;
+}
+
+label {
+    color: #FF5053;
+    text-align: right;
+}
+
+input {
+    color: #999999;
+}
+
+.mui-text-center {
+    padding: 1rem;
+}
+
+.mui-btn-block {
+    margin: 0;
+}
