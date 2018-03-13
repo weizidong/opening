@@ -1,0 +1,21 @@
+{
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-uglify": "^3.0.0"
+  },
+  "name": "xub",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "scripts": {
+    "build": "gulp build",
+    "clean": "gulp clean"
+  },
+  "author": "yanmin",
+  "license": "ISC"
+}

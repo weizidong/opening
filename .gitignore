@@ -9,3 +9,4 @@
 **/*.zip
 **/download/
 **/node_modules/
+**/dist
