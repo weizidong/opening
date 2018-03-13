@@ -3,12 +3,15 @@ package com.weizidong.service;
 import com.weizidong.model.dao.HouseDao;
 import com.weizidong.model.entity.House;
 import com.weizidong.model.entity.User;
+import com.weizidong.model.enums.SaleType;
 import com.weizidong.rest.dto.HouseDto;
+import org.restful.api.filter.exception.ResponseCode;
+import org.restful.api.filter.exception.WebException;
+import org.restful.api.utils.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 用户业务
@@ -37,11 +40,23 @@ public class HouseService {
      * @param houseId 房子ID
      * @param u       用户
      */
-    public void purchase(Integer houseId, User u) {
+    public synchronized Map<String, Object> purchase(Integer houseId, User u) {
         House h = houseDao.getById(houseId);
-        if (h.getUserId() != null && h.getUserId() > 0) {
-
+        Assert.isFalse(h.getUserId() != null && h.getUserId() > 0, "该房产已被认购！");
+        House db = houseDao.getByUserId(u.getId());
+        if (db != null) {
+            throw new WebException(ResponseCode.参数错误.getCode(), "您已经认购了房产【" + db.getRoomNo() + "】,不能再次认购！");
         }
+        h.setUserId(u.getId());
+        h.setStatus(SaleType.已售.getCode());
+        h.setSalesTime(new Date());
+        houseDao.update(h);
+        Map<String, Object> res = new HashMap<>(16);
+        res.put("phone", u.getPhone());
+        res.put("name", u.getName());
+        res.put("room", h.getRoomNo());
+        res.put("time", h.getSalesTime());
+        return res;
     }
 
     /**
@@ -65,7 +80,7 @@ public class HouseService {
                     h.setArea(area);
                     h.setUnitPrice(unitPrice);
                     h.setTotalPrice(area * unitPrice);
-                    h.setStatus(0);
+                    h.setStatus(SaleType.未售.getCode());
                     houseList.add(h);
                 }
             }

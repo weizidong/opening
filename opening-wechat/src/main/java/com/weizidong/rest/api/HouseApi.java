@@ -42,9 +42,9 @@ public class HouseApi {
 
     @PUT
     @Path("/purchase/{houseId}")
-    public void purchase(@PathParam("houseId") Integer houseId, @Context HttpServletRequest request) {
+    public Map<String, Object> purchase(@PathParam("houseId") Integer houseId, @Context HttpServletRequest request) {
         User u = SessionUtil.getUser(request, User.class);
-        houseService.purchase(houseId, u);
+        return houseService.purchase(houseId, u);
     }
 
     @GET

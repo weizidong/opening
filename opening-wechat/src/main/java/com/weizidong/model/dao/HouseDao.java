@@ -132,4 +132,13 @@ public class HouseDao {
         f.setHouseId(houseId);
         favoriteMapper.delete(f);
     }
+
+    /**
+     * 修改
+     *
+     * @param h 房源信息
+     */
+    public void update(House h) {
+        houseMapper.updateByPrimaryKeySelective(h);
+    }
 }
