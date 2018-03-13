@@ -71,6 +71,7 @@ function find(tid) {
     ajax('/rest/house/find/' + tid, {
         type: 'GET',
         success: function (data) {
+            list = {}
             data.forEach(function (item) {
                 if (list[item.floorNo]) {
                     list[item.floorNo].push(item)
