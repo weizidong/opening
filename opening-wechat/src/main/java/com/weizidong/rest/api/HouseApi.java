@@ -54,6 +54,20 @@ public class HouseApi {
         return houseService.getFavorite(u.getId());
     }
 
+    @PUT
+    @Path("/favorite/{houseId}")
+    public void favorite(@PathParam("houseId") Integer houseId, @Context HttpServletRequest request) {
+        User u = SessionUtil.getUser(request, User.class);
+        houseService.favorite(u.getId(), houseId);
+    }
+
+    @PUT
+    @Path("/delFavorite/{houseId}")
+    public void delFavorite(@PathParam("houseId") Integer houseId, @Context HttpServletRequest request) {
+        User u = SessionUtil.getUser(request, User.class);
+        houseService.delFavorite(houseId, u.getId());
+    }
+
     @GET
     @Path("/getMine")
     public Map<String, Object> getMine(@Context HttpServletRequest request) {

@@ -51,6 +51,14 @@
         .mui-popup {
             width: 300px;
         }
+
+        .btn1 {
+            top: 30% !important;
+        }
+
+        .btn2 {
+            top: 70% !important;
+        }
     </style>
 </head>
 
@@ -86,31 +94,7 @@
 <script src="js/moment.min.js"></script>
 <script src="js/app.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-    mui.init({
-        pullRefresh: {
-            container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-            down: {
-                style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-                color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-                height: '50px', //可选,默认50px.下拉刷新控件的高度,
-                range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-                offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-                auto: false, //可选,默认false.首次加载自动上拉刷新一次
-                callback: function () { //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-
-                }
-            },
-            up: {
-                height: 50, //可选.默认50.触发上拉加载拖动距离
-                auto: false, //可选,默认false.自动上拉加载一次
-                contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
-                contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-                callback: function () { //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-
-                }
-            }
-        }
-    })
+    mui.init()
     // 获取开始时间
     var timmer;
     ajax('/rest/system/get/START_TIME', {
@@ -146,35 +130,60 @@
     goUrl('.mui-bar .mui-tab-item', function (that) {
         return that.getAttribute('href')
     })
-    // 获取我的收藏
-    ajax('/rest/house/getFavorite', {
-        type: 'GET',
-        success: function (list) {
-            var html = ''
-            if (!list || list.length < 1) {
-                html += '<li class="mui-table-view-cell mui-text-center">暂无收藏</li>'
-            } else {
-                list.forEach(function (item) {
-                    html += '<li class="mui-table-view-cell">' +
-                        '                        <a class="mui-row">' +
-                        '                            <div class="mui-col-xs-6 mui-col-sm-6">房号：' + item.roomNo + '</div>' +
-                        '                            <div class="mui-col-xs-6 mui-col-sm-6">状态：<span class="' + (['green', 'red', ''][item.status]) + '">' + ['未售', '已售', '未推'][item.status] + '</span></div>' +
-                        '                            <div class="mui-col-xs-6 mui-col-sm-6">面积：' + item.area + '㎡</div>' +
-                        '                            <div class="mui-col-xs-6 mui-col-sm-6">单价：' + item.unitPrice + '元</div>' +
-                        '                            <div class="mui-col-xs-6 mui-col-sm-6">总价：' + (item.totalPrice / 10000) + '万</div>' +
-                        '                            <div class="mui-col-xs-6 mui-col-sm-6">户型：三室两厅</div>' +
-                        '                            <div class="mui-col-xs-6 mui-col-sm-6">收藏数：' + item.count + '</div>' +
-                        '                        </a>' +
-                        '                        <span class="mui-badge ' + (item.status === 0 ? 'mui-badge-primary' : '') + '" status="' + item.status + '">认购</span>' +
-                        '                    </li>'
-                })
-            }
-            mui('.mui-table-view')[0].innerHTML = html
-        }
-    })
 
-    mui('.mui-table-view-cell').on('tap', '.mui-badge-primary', function () {
-        mui.confirm('<div class="mui-text-left">\
+    // 获取我的收藏
+    getFavorite()
+
+    function getFavorite() {
+        ajax('/rest/house/getFavorite', {
+            type: 'GET',
+            success: function (list) {
+                var html = ''
+                if (!list || list.length < 1) {
+                    html += '<li class="mui-table-view-cell mui-text-center">暂无收藏</li>'
+                } else {
+                    list.forEach(function (item) {
+                        html += '<li class="mui-table-view-cell">' +
+                            '                        <a class="mui-row">' +
+                            '                            <div class="mui-col-xs-6 mui-col-sm-6">房号：' + item.roomNo + '</div>' +
+                            '                            <div class="mui-col-xs-6 mui-col-sm-6">状态：<span class="' + (['green', 'red', ''][item.status]) + '">' + ['未售', '已售', '未推'][item.status] + '</span></div>' +
+                            '                            <div class="mui-col-xs-6 mui-col-sm-6">面积：' + item.area + '㎡</div>' +
+                            '                            <div class="mui-col-xs-6 mui-col-sm-6">单价：' + item.unitPrice + '元</div>' +
+                            '                            <div class="mui-col-xs-6 mui-col-sm-6">总价：' + (item.totalPrice / 10000) + '万</div>' +
+                            '                            <div class="mui-col-xs-6 mui-col-sm-6">户型：三室两厅</div>' +
+                            '                            <div class="mui-col-xs-6 mui-col-sm-6">收藏数：' + item.count + '</div>' +
+                            '                        </a>' +
+                            '                        <button type="button" class="mui-btn btn1 ' + (item.status === 0 ? 'mui-btn-primary' : 'mui-btn-outlined') + '" status="' + item.status + '">认购</button>' +
+                            '                        <button type="button" class="mui-btn btn2 mui-btn-success" fid="' + item.id + '">取消收藏</button>' +
+                            '                    </li>'
+                    })
+                }
+                mui('.mui-table-view')[0].innerHTML = html
+                setBtnSuccess()
+            }
+        })
+    }
+
+    // 取消收藏
+    function setBtnSuccess() {
+        mui('.mui-table-view-cell').off('tap', '.mui-btn-success')
+        mui('.mui-table-view-cell').on('tap', '.mui-btn-success', function () {
+            var fid = this.getAttribute('fid')
+            ajax('/rest/house/delFavorite/' + fid, {
+                type: 'PUT',
+                success: function () {
+                    mui.toast('取消收藏成功！')
+                    getFavorite()
+                }
+            })
+        })
+    }
+
+    // 购买
+    function purchase() {
+        mui('.mui-table-view-cell').off('tap', '.mui-btn-primary')
+        mui('.mui-table-view-cell').on('tap', '.mui-btn-primary', function () {
+            mui.confirm('<div class="mui-text-left">\
 								<div class="mui-input-row">\
 									<label>房号：</label>\
 									<div>1号楼1-101 </div>\
@@ -212,8 +221,8 @@
 									<input name="agreement" id="agreement" type="radio">\
 								</div> \
 							</div>', '房产信息', ['取消认购', '确认认购'],
-            function (e) {
-                mui.alert('<div class="mui-text-left">\
+                function (e) {
+                    mui.alert('<div class="mui-text-left">\
 									<div class="mui-input-row">\
 										<label>客户名称：</label>\
 										<div>申何健 </div>\
@@ -231,12 +240,13 @@
 										<div>2018-03-01 12:23:59</div>\
 									</div>\
 								</div>', '提示', '确定',
-                    function (e) {
-                        location.href = 'me.html'
-                    }, 'div')
-            }, 'div')
-        goUrl('#agreementHtml', 'agreement.html')
-    })
+                        function (e) {
+                            location.href = 'me.html'
+                        }, 'div')
+                }, 'div')
+            goUrl('#agreementHtml', 'agreement.html')
+        })
+    }
 </script>
 </body>
 

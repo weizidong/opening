@@ -101,4 +101,28 @@ public class HouseService {
     public House getMine(Integer userId) {
         return houseDao.getByUserId(userId);
     }
+
+    /**
+     * 收藏指定的房产
+     *
+     * @param userId  用户ID
+     * @param houseId 房产ID
+     */
+    public void favorite(Integer userId, Integer houseId) {
+        Boolean flag = houseDao.checkFavorite(userId, houseId);
+        if (!flag) {
+            // 未收藏，创建收藏记录
+            houseDao.createFavorite(userId, houseId);
+        }
+    }
+
+    /**
+     * 删除指定用户的收藏记录
+     *
+     * @param houseId 房产ID
+     * @param userId  用户ID
+     */
+    public void delFavorite(Integer houseId, Integer userId) {
+        houseDao.delFavorite(houseId, userId);
+    }
 }
