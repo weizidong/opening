@@ -73,6 +73,32 @@ export const tree2List = (tree, filed, fn = (item) => item) => {
   return res
 }
 /**
+ * list转换为树结构
+ * @param list list
+ * @param filed 子节点字段
+ * @param childrenFn 获取子节点的方式
+ * @param topFn 顶级节点获取方式
+ * @returns {Array}
+ */
+export const list2Tree = (list, filed, childrenFn = (item, list) => list.filter(({pid}) => item.id === pid), topFn = (list) => list.filter(({pid}) => !pid)) => {
+  let res = []
+  if (!list || !list.length) {
+    return res
+  }
+  res = topFn(list)
+  const setChild = (child = [], level) =>
+    child.forEach(it => {
+      it.level = level + 1
+      const children = childrenFn(it, list, it.level)
+      if (children && children.length > 0) {
+        setChild(children, it.level)
+        it[filed] = children
+      }
+    })
+  setChild(res, 0)
+  return res
+}
+/**
  * coocki操作封装
  * @type {{set: (function(*, *, *)), get: (function(*)), delete: (function(*=))}}
  */
@@ -88,5 +114,22 @@ export const coocki = {
   },
   delete(name) {
     this.set(name, '', -1)
+  },
+}
+/**
+ * localStorage操作封装
+ */
+export const storage = {
+  get(key, def = '') {
+    return JSON.parse(localStorage.getItem(key) || def)
+  },
+  set(key, obj) {
+    localStorage.setItem(key, JSON.stringify(obj))
+  },
+  delete(key) {
+    localStorage.removeItem(key)
+  },
+  clear() {
+    localStorage.clear()
   },
 }

@@ -3,37 +3,51 @@
 </style>
 
 <template>
-  <transition name="fade" mode="out-in">
-    <el-card v-if="!show" class="login" key="login">
-      <div class="title">登录</div>
-      <el-form :model="data" :rules="rules1" ref="ruleForm1" label-width="100px">
-        <el-form-item label="账号 ：" prop="account">
-          <el-input v-model="data.account" placeholder="账号..."></el-input>
-        </el-form-item>
-        <el-form-item label="密码：" prop="password">
-          <el-input type="password" v-model="data.password" placeholder="密码..."></el-input>
-        </el-form-item>
-        <el-button type="primary" @click="submit">登录</el-button>
-        <!--<el-button class="register" type="text" size="small" @click="show = true">没有账号怎么办？ 去注册！</el-button>-->
-      </el-form>
-    </el-card>
-    <!--<el-card v-if="show" class="login" key="register">-->
-    <!--<div class="title">注册</div>-->
-    <!--<el-form :model="data" :rules="rules2" ref="ruleForm2" label-width="100px">-->
-    <!--<el-form-item label="昵称：" prop="nickName">-->
-    <!--<el-input v-model="data.nickName"></el-input>-->
-    <!--</el-form-item>-->
-    <!--<el-form-item label="电话号码：" prop="account">-->
-    <!--<el-input v-model="data.account"></el-input>-->
-    <!--</el-form-item>-->
-    <!--<el-form-item label="密码：" prop="password">-->
-    <!--<el-input type="password" v-model="data.password"></el-input>-->
-    <!--</el-form-item>-->
-    <!--<el-button type="primary" @click="register">注册</el-button>-->
-    <!--<el-button class="register" type="text" size="small" @click="show = false">已经有账号了！ 去登录！</el-button>-->
-    <!--</el-form>-->
-    <!--</el-card>-->
-  </transition>
+  <div class="login_bg">
+    <transition name="fade" mode="out-in">
+      <div v-if="!show" class="login" key="login" @keyup.enter="submit">
+        <img class="img01" src="/static/img/logo_xxb.png">
+        <img class="img02" src="/static/img/login_img.png">
+        <div class="box">
+          <div class="title">用户管理后台
+            <div>User Management Background</div>
+          </div>
+          <el-form :model="data" :rules="rules1" ref="ruleForm1" labelWidth="0">
+            <el-form-item label="" prop="account">
+              <div class="el-input">
+                <input v-model="data.account" class="el-input__inner" placeholder="请输入账号">
+                <i class="el-input__icon el-icon-my-profilefill"/>
+              </div>
+            </el-form-item>
+            <el-form-item label="" prop="password">
+              <div class="el-input">
+                <input type="password" v-model="data.password" class="el-input__inner" placeholder="请输入密码">
+                <i class="el-input__icon el-icon-my-lock_fill"/>
+              </div>
+            </el-form-item>
+            <el-button type="primary" @click="submit">登录</el-button>
+            <!--<el-button class="register" type="text" size="small" @click="show = true">没有账号怎么办？ 去注册！</el-button>-->
+          </el-form>
+        </div>
+      </div>
+      <!--<el-card v-if="show" class="login" key="register">-->
+      <!--<div class="title">注册</div>-->
+      <!--<el-form :model="data" :rules="rules2" ref="ruleForm2" labelWidth="100px">-->
+      <!--<el-form-item label="昵称：" prop="nickName">-->
+      <!--<el-input v-model="data.nickName"></el-input>-->
+      <!--</el-form-item>-->
+      <!--<el-form-item label="电话号码：" prop="account">-->
+      <!--<el-input v-model="data.account"></el-input>-->
+      <!--</el-form-item>-->
+      <!--<el-form-item label="密码：" prop="password">-->
+      <!--<el-input type="password" v-model="data.password"></el-input>-->
+      <!--</el-form-item>-->
+      <!--<el-button type="primary" @click="register">注册</el-button>-->
+      <!--<el-button class="register" type="text" size="small" @click="show = false">已经有账号了！ 去登录！</el-button>-->
+      <!--</el-form>-->
+      <!--</el-card>-->
+    </transition>
+  </div>
 </template>
 
 <script>

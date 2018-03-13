@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weizidong.model.mapper.HouseMapper">
+    <resultMap id="BaseResultMap" type="com.weizidong.model.entity.House">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="building_no" jdbcType="INTEGER" property="buildingNo"/>
+        <result column="floor_no" jdbcType="INTEGER" property="floorNo"/>
+        <result column="room_no" jdbcType="VARCHAR" property="roomNo"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="house_type" jdbcType="INTEGER" property="houseType"/>
+        <result column="sales_time" jdbcType="TIMESTAMP" property="salesTime"/>
+        <result column="area" jdbcType="DOUBLE" property="area"/>
+        <result column="unit_price" jdbcType="DOUBLE" property="unitPrice"/>
+        <result column="total_price" jdbcType="DOUBLE" property="totalPrice"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+</mapper>

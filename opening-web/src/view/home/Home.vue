@@ -4,34 +4,21 @@
 
 <template>
   <div class="home">
-    <el-card v-for="(item,i) in statistic" :key="i">
-      <div>{{item.count}}</div>
-      <div>{{item.title}}</div>
-    </el-card>
+    <div class="box">
+      <img src="/static/img/logo.png" alt="">
+      <div>欢迎使用学训宝管理后台！</div>
+    </div>
   </div>
 </template>
 
 <script>
-  import {getStatisticApi} from '../../api/systemApi'
-
   export default {
     name: 'home',
     data() {
       return {
-        statistic: [{filed: 'topicCount', title: '新增提问', count: 0},
-          {filed: 'backSxtopicCount', title: '待回复问题', count: 0},
-          {filed: 'userCount', title: '用户总量', count: 0},
-          {filed: 'userRollCount', title: '今日注册', count: 0},
-          {filed: 'orderCount', title: '今日订单', count: 0},
-          {filed: 'articleCount', title: '文章总数', count: 0}],
+//        rules: [{filed: '', title: '今日注册用户'}, {filed: '', title: '昨日注册用户'}, {filed: '', title: '本月注册用户'}, {filed: '', title: '上月注册用户'},
+//          {filed: '', title: '本季度注册用户'}, {filed: '', title: '上季度注册用户'}, {filed: '', title: '今日订单量'}],
       }
-    },
-    created() {
-      getStatisticApi().then(data => {
-        this.statistic.forEach(item => {
-          item.count = data[item.filed]
-        })
-      })
     },
   }
 </script>

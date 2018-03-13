@@ -9,6 +9,7 @@
 </template>
 
 <script>
+  require("../static/font/iconfont.css")
   export default {
     name: 'app',
   }

@@ -7,16 +7,24 @@ let mine = null
 // 缓存菜单信息
 let menus = null
 // 登录
-export const loginApi = ({account = '', password = '', code = ''} = {}) => ajax.post(`${ROOT}/login`, {account, password: md5(password), code})
+export const loginApi = ({account = '', password = '', code = ''} = {}) => {
+  menus = null
+  mine = null
+  return ajax.post(`${ROOT}/login`, {account, password: md5(password), code})
+}
 // 获取当前登录
-export const mineApi = async () => {
-  if (!mine) {
+export const mineApi = async (flag) => {
+  if (!flag || !mine) {
     mine = await ajax.get(`${ROOT}/current`)
   }
   return Promise.resolve(mine)
 }
 // 登出
-export const logoutApi = () => ajax.get(`${ROOT}/logout`)
+export const logoutApi = () => {
+  menus = null
+  mine = null
+  return ajax.get(`${ROOT}/logout`)
+}
 // 获取菜单
 export const menuApi = async () => {
   if (!menus) {
@@ -31,6 +39,10 @@ export const createAdminApi = ({avatar, account, password, name, birthday, sex =
 // 修改管理员
 export const updateAdminApi = ({id, avatar, account, password, name, birthday, sex = 1, email, phone, roles = []} = {}) => ajax.put(`${ROOT}/update`, {
   id, avatar, account, password: password && md5(password), name, birthday, sex, email, phone, roles,
+})
+// 修改我的资料
+export const editAdminApi = ({id, avatar, account, name, birthday, sex = 1, email, phone} = {}) => ajax.put(`${ROOT}/edit`, {
+  id, avatar, account, name, birthday, sex, email, phone,
 })
 // 获取管理员
 export const findAdminListApi = ({page = 1, pageSize = 10} = {}) => ajax.post(`${ROOT}/list`, {page, pageSize})

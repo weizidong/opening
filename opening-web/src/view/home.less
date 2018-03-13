@@ -8,7 +8,7 @@
   right: 0;
   // 内容定位
   .content {
-    transition: all .3s ease;
+    transition: all .5s ease;
     position: absolute;
     top: @header-height;
     bottom: 0;
@@ -34,24 +34,13 @@
     // 内容统一样式
     .content_data {
       position: relative;
+      min-height: 100%;
       // 头部搜索栏，按钮样式
       & > .el-button {
         position: absolute;
         right: 0;
         top: -10px;
       }
-      .el-form-item__content > button {
-        margin: 10px 60px;
-      }
-      .el-form {
-        .avatar_box {
-          margin-right: 10px;
-        }
-        .ueContent {
-          margin-top: 50px;
-        }
-      }
-
       // 树结构样式
       .el-tree {
         border: none;
@@ -65,16 +54,20 @@
         }
         .el-tree-node__content {
           border-bottom: 1px solid @tree-border;
+          height: auto;
           &:hover {
             background: @tree-hover;
           }
-          & > .el-tree-node__expand-icon {
-            float: left;
-            top: 14px;
-            position: relative;
-          }
+          //& > .el-tree-node__expand-icon {
+          //  float: left;
+          //  top: 14px;
+          //  position: relative;
+          //}
           .tree_data {
             overflow: hidden;
+            width: 100%;
+            line-height: 38px;
+            height: 38px;
             .tree_name {
               float: left;
               & > i {
@@ -100,61 +93,104 @@
         padding-bottom: 15px;
       }
       // 表单样式
-      .el-form {
+      & > .el-form {
+        border-radius: 6px;
+        background-color: @form-bg;
+        box-shadow: 0 0 10px 0 @form-shadow;
         text-align: center;
-        .el-form-item__content {
+        padding: @form-padding 0;
+        .title {
+          color: @form-title;
+          font-size: 20px;
+          padding: 0 26px @form-padding 26px;
+          border-bottom: 1px solid @form-title-border;
           text-align: left;
+          & + .el-form-item {
+            padding-top: @form-padding;
+          }
         }
-        .edui-toolbar {
-          line-height: normal;
+        .el-form-item {
+          text-align: left;
+          padding: 0 @form-padding;
+          .el-form-item__content {
+            text-align: left;
+            //& > .el-input {
+            //  max-width: 60%;
+            //  float: left;
+            //}
+            .el-form-item__error {
+              position: relative;
+              padding-top: 0;
+              padding-left: @form-padding;
+              line-height: 37px;
+              &:before {
+                content: '×';
+                background-color: #e7574f;
+                border-radius: 50%;
+                color: #FFFFFF;
+                display: inline-block;
+                line-height: 1;
+                font-size: 18px;
+                width: 18px;
+                height: 18px;
+                text-align: center;
+                position: relative;
+                top: 2px;
+              }
+            }
+          }
         }
       }
       // 表格样式
-      .table_page {
-        .cell {
-          text-align: center;
-        }
-        .el-table {
-          color: @table-color;
-          border: none;
-          .sort-caret.ascending {
-            border-bottom-color: @table-sort-caret;
-          }
-          .sort-caret.descending {
-            border-top-color: @table-sort-caret;
-          }
-          .ascending .sort-caret.ascending {
-            border-bottom-color: @table-sorting;
-          }
-          .descending .sort-caret.descending {
-            border-top-color: @table-sorting;
-          }
-          thead {
-            th {
-              //text-align: center;
-              border-bottom: 1px solid @th-border;
-              background-color: @table-sort-caret;
-              .cell {
-                background-color: @table-sort-caret;
-                line-height: 60px;
+      .el-table {
+        color: @table-color;
+        border: none;
 
-              }
+        .el-table__header tr {
+          line-height: 60px;
+        }
+        .sort-caret.ascending {
+          border-bottom-color: @table-sort-caret;
+        }
+        .sort-caret.descending {
+          border-top-color: @table-sort-caret;
+        }
+        .ascending .sort-caret.ascending {
+          border-bottom-color: @table-sorting;
+        }
+        .descending .sort-caret.descending {
+          border-top-color: @table-sorting;
+        }
+        thead {
+          th {
+            text-align: center;
+            border-bottom: 1px solid @th-border;
+            border-top: 1px solid @th-border-top;
+            background-color: @th-bg;
+            .cell {
+              background-color: @th-bg;
             }
           }
-          tr {
-            &.hover-row > td {
-              cursor: pointer;
-              background-color: @tr-hover;
-            }
-            td {
-              border-bottom: 1px solid @td-border;
-              .cell {
-                & > img {
-                  margin-top: 7px;
-                }
-              }
+        }
+        tr {
+          &.hover-row > td {
+            cursor: pointer;
+            background-color: @tr-hover;
+          }
+          td {
+            text-align: center;
+            border-bottom: 1px solid @td-border;
+            .el-tag{
+              margin: 5px 5px 0 0;
+              padding: 0 8px;
             }
           }
+        }
+        &:after {
+          content: normal;
+        }
+        &:before {
+          content: normal;
         }
       }
       // 分页样式

@@ -11,7 +11,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/rest': {
-        target: 'http://manage.chaoyueshidai.xin',
+        target: 'http://localhost:8009',
         changeOrigin: true,
         pathRewrite: {
           '^/rest': '/rest'

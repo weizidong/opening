@@ -7,7 +7,29 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <title>我的资料</title>
     <link href="css/mui.min.css" rel="stylesheet"/>
-    <link href="css/me.css" rel="stylesheet"/>
+    <style type="text/css">
+        .head-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+        }
+
+        .mui-card-content {
+            padding-top: 50px;
+            padding-bottom: 50px;
+            font-size: 20px;
+        }
+
+        .mui-input-row label {
+            width: 40%;
+        }
+
+        .mui-input-row div {
+            font-family: 'Helvetica Neue', Helvetica, sans-serif;
+            line-height: 1.1;
+            padding: 11px 15px;
+        }
+    </style>
 </head>
 <body>
 <div class="mui-content">
@@ -59,6 +81,31 @@
 <script src="js/mui.min.js"></script>
 <script src="js/moment.min.js"></script>
 <script src="js/app.js"></script>
-<script src="js/me.js"></script>
+<script type="application/javascript">
+    mui.init()
+    goUrl('.mui-bar .mui-tab-item', function (that) {
+        return that.getAttribute('href')
+    })
+    goUrl('.togo>a', function (that) {
+        return that.getAttribute('href')
+    })
+    ajax('/rest/house/getMine', {
+        type: 'GET',
+        success: function (data) {
+            var user = data.user
+            var house = data.house
+            mui('#name')[0].innerText = user.name
+            mui('#headimgurl')[0].setAttribute('src', user.headimgurl)
+            if (house) {
+                mui('#phone')[0].innerText = user.phone
+                mui('#roomNo')[0].innerText = house.roomNo
+                mui('#salesTime')[0].innerText = moment(house.salesTime).format('YYYY-MM-DD HH:mm:ss')
+                mui('#house')[0].style.display = 'block'
+            } else {
+                mui('.togo')[0].style.display = 'block'
+            }
+        }
+    })
+</script>
 </body>
 </html>

@@ -7,7 +7,22 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <title>微信选房协议</title>
     <link href="css/mui.min.css" rel="stylesheet"/>
-    <link href="css/agreement.css" rel="stylesheet"/>
+    <style type="text/css">
+        .mui-content {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .mui-bottom {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 2rem;
+        }
+    </style>
 </head>
 <body>
 <div class="mui-content">
@@ -21,6 +36,14 @@
 </div>
 <script src="js/mui.min.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-<script src="js/agreement.js"></script>
+<script type="application/javascript">
+    mui.init()
+    mui('body').on('tap', '#agree', function () {
+        location.href = 'house.html'
+    })
+    mui('body').on('tap', '#refuse', function () {
+        wx.closeWindow()
+    })
+</script>
 </body>
 </html>

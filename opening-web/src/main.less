@@ -1,5 +1,4 @@
 @import "./base.less";
-@import "../static/font/iconfont.css";
 // TODO:全局样式定义
 // 文本域禁止改变大小
 textarea {
@@ -47,11 +46,17 @@ body {
   padding: 8px 18px;
   border-radius: 20px;
   color: #2CA2FC;
+  background: #FFFFFF;
   border-color: #2CA2FC;
-  &:hover {
+  &:hover, &:focus {
     color: #FFFFFF;
-    background-color: #2CA2FC;
+    background: #2CA2FC;
     border-color: #2CA2FC;
+  }
+  &.is-active, &:active {
+    background: #FFFFFF;
+    border-color: #2CA2FC;
+    color: #2CA2FC;
   }
 }
 
@@ -60,10 +65,35 @@ body {
   padding: 8px 18px;
   border-radius: 20px;
   color: #ff4949;
+  background-color: #FFFFFF;
   border-color: #ff4949;
-  &:hover {
+  &:hover, &:focus {
     color: #FFFFFF;
-    background-color: #ff4949;
     border-color: #ff4949;
+    background: #ff4949;
+  }
+  &.is-active, &:active {
+    background: #FFFFFF;
+    border-color: #ff4949;
+    color: #ff4949;
+  }
+}
+
+// 导出按钮
+.el-button--export {
+  background-color: #2CA2FC;
+  border-radius: 20px;
+  border-color: #2CA2FC;
+  padding: 8px 18px;
+  color: #FFFFFF;
+  &:hover, &:focus {
+    color: #2CA2FC;
+    background-color: #FFFFFF;
+    border-color: #2CA2FC;
+  }
+  &.is-active, &:active {
+    background: #2CA2FC;
+    border-color: #2CA2FC;
+    color: #FFFFFF;
   }
 }

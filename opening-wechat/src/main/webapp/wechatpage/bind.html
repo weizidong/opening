@@ -7,7 +7,41 @@
     <meta content="black" name="apple-mobile-web-app-status-bar-style">
     <title>绑定用户</title>
     <link href="css/mui.min.css" rel="stylesheet"/>
-    <link href="css/bind.css" rel="stylesheet"/>
+    <style type="text/css">
+        .mui-content {
+            background: url(img/bg-01.jpg) no-repeat;
+            background-size: 100% 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        .mui-input-group {
+            position: absolute;
+            width: 100%;
+            background: rgba(0, 0, 0, .7);
+            bottom: 0;
+        }
+
+        label {
+            color: #FF5053;
+            text-align: right;
+        }
+
+        input {
+            color: #999999;
+        }
+
+        .mui-text-center {
+            padding: 1rem;
+        }
+
+        .mui-btn-block {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
 <div class="mui-content">
@@ -31,6 +65,42 @@
 </div>
 <script src="js/mui.min.js"></script>
 <script src="js/app.js"></script>
-<script src="js/bind.js"></script>
+<script type="application/javascript">
+    mui.init()
+    var id = getQuery().id
+    ajax('/rest/user/get/' + id, {
+        type: 'GET',
+        success: function(data) {
+            if(data.openid) {
+                location.href = 'house.html'
+            }
+            if(data) {
+                mui('#name')[0].setAttribute('placeholder', data.name || '未知')
+                mui('#phone')[0].setAttribute('placeholder', data.phone ? data.phone.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2') : '未知')
+            }
+        }
+    })
+    mui('body').on('tap', '#bind', function() {
+        var idNumber = mui('#idNumber')[0].value
+        if(!/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/.test(idNumber)) {
+            mui.alert('请输入正确的身份证号码进行绑定！', '提示', '确定', function(e) {
+                mui('#idNumber')[0].value = ''
+            })
+            return
+        }
+        ajax('/rest/user/bind', {
+            data: {
+                id: id,
+                idNumber: idNumber
+            },
+            success: function(data) {
+                location.href = 'agreement.html'
+            },
+            error: function() {
+                mui('#idNumber')[0].value = ''
+            }
+        })
+    })
+</script>
 </body>
 </html>

@@ -17,7 +17,6 @@
 <script>
   import MyHeader from '../components/header/Header.vue'
   import Sidebar from '../components/sidebar/Sidebar.vue'
-
   export default {
     name: 'home',
     components: {MyHeader, Sidebar},

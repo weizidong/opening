@@ -22,7 +22,7 @@
         <logger name="io.swagger" level="WARN"/>
         <!-- 过滤掉极光推送 -->
         <logger name="cn.jiguang" level="WARN"/>
-        <Root level="all">
+        <Root level="INFO">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
