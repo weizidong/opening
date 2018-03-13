@@ -104,6 +104,9 @@ public class HouseService {
      * @return 收藏的房源列表
      */
     public List<HouseDto> getFavorite(Integer userId) {
+        if (userId == null || userId < 1) {
+            return null;
+        }
         return houseDao.getFavorite(userId);
     }
 
@@ -114,6 +117,9 @@ public class HouseService {
      * @return 房源信息
      */
     public House getMine(Integer userId) {
+        if (userId == null || userId < 1) {
+            return null;
+        }
         return houseDao.getByUserId(userId);
     }
 

@@ -37,13 +37,13 @@ goUrl('.mui-bar .mui-tab-item', function (that) {
 
 // 获取我的收藏
 getFavorite()
-var list;
+var list = [];
 
 function getFavorite() {
     ajax('/rest/house/getFavorite', {
         type: 'GET',
         success: function (data) {
-            list = data
+            list = data || []
             var html = ''
             if (!list || list.length < 1) {
                 html += '<li class="mui-table-view-cell mui-text-center">暂无收藏</li>'
