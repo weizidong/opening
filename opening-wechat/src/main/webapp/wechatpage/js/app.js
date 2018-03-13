@@ -1,8 +1,8 @@
 function ajax(url, config) {
 	config = config || {};
-	console.log('请求:', url)
-	console.log('方式:', config.type || 'POST')
-	console.log('参数:', config.data)
+	// console.log('请求:', url)
+	// console.log('方式:', config.type || 'POST')
+	// console.log('参数:', config.data)
 	mui.ajax(url, {
 		data: config.data,
 		dataType: 'json', //服务器返回json格式数据
@@ -19,12 +19,12 @@ function ajax(url, config) {
 				data = JSON.parse(data);
 			}
 			if(data.code !== 200) {
-				console.log('错误:', data)
+				// console.log('错误:', data)
 				mui.alert(data.msg, '提示', '确定', function() {
 					config.error && config.error();
 				})
 			} else {
-				console.log('结果:', data.data)
+				// console.log('结果:', data.data)
 				config.success && config.success(data.data);
 			}
 		},
