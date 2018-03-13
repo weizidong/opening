@@ -84,10 +84,21 @@ public class HouseService {
 
     /**
      * 获取我的收藏列表
+     *
      * @param userId 用户ID
      * @return 收藏的房源列表
      */
     public List<HouseDto> getFavorite(Integer userId) {
         return houseDao.getFavorite(userId);
+    }
+
+    /**
+     * 获取指定用户认筹的房子
+     *
+     * @param userId 用户ID
+     * @return 房源信息
+     */
+    public House getMine(Integer userId) {
+        return houseDao.getByUserId(userId);
     }
 }

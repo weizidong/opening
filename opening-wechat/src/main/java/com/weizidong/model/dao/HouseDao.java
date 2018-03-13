@@ -70,4 +70,20 @@ public class HouseDao {
     public List<HouseDto> getFavorite(Integer userId) {
         return houseMapper.getFavorite(userId);
     }
+
+    /**
+     * 根据用户ID获取房源信息
+     *
+     * @param userId 用户ID
+     * @return 房源信息
+     */
+    public House getByUserId(Integer userId) {
+        House h = new House();
+        h.setUserId(userId);
+        List<House> houseList = houseMapper.select(h);
+        if (houseList == null || houseList.isEmpty()) {
+            return null;
+        }
+        return houseList.get(0);
+    }
 }

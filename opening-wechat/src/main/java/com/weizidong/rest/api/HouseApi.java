@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 房源接口
@@ -47,8 +49,19 @@ public class HouseApi {
 
     @GET
     @Path("/getFavorite")
-    public List<HouseDto> getFavorite(@Context HttpServletRequest request){
+    public List<HouseDto> getFavorite(@Context HttpServletRequest request) {
         User u = SessionUtil.getUser(request, User.class);
         return houseService.getFavorite(u.getId());
+    }
+
+    @GET
+    @Path("/getMine")
+    public Map<String, Object> getMine(@Context HttpServletRequest request) {
+        User u = SessionUtil.getUser(request, User.class);
+        House h = houseService.getMine(u.getId());
+        Map<String, Object> res = new HashMap<>(16);
+        res.put("user", u);
+        res.put("house", h);
+        return res;
     }
 }
