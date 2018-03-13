@@ -177,7 +177,7 @@
 <script src="js/mui.min.js"></script>
 <script src="js/moment.min.js"></script>
 <script src="js/app.js"></script>
-<script type="application/javascript">
+<script language="javascript" defer>
     goUrl('.mui-bar .mui-tab-item', function (that) {
         return that.getAttribute('href')
     })
@@ -235,7 +235,7 @@
             })
             mui('.mui-slider .mui-slider-indicator')[0].innerHTML = html
             mui('.mui-slider-group')[0].innerHTML = html2
-            mui.init()
+            mui.init({})
             mui('.mui-scroll-wrapper').scroll({
                 deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
             })
