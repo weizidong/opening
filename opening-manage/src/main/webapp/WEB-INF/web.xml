@@ -34,6 +34,23 @@
         <filter-name>SpringEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <!-- 将以/view/*,/,/login请求转发到/index.html -->
+    <filter>
+        <filter-name>viewFilter</filter-name>
+        <filter-class>org.restful.api.filter.ViewFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>viewFilter</filter-name>
+        <url-pattern>/view/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>viewFilter</filter-name>
+        <url-pattern>/</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>viewFilter</filter-name>
+        <url-pattern>/login</url-pattern>
+    </filter-mapping>
     <!-- 配置jersey入口,将/rest/开头的请求交给jersey处理 -->
     <servlet>
         <servlet-name>JerseyServlet</servlet-name>
