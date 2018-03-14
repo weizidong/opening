@@ -1,8 +1,6 @@
 <template>
   <div class="content_data">
-    <Breadcrumb>
-      <el-breadcrumb-item>登记认筹</el-breadcrumb-item>
-    </Breadcrumb>
+    <Breadcrumb></Breadcrumb>
     <el-form :model="user" :rules="rules" ref="user" labelWidth="100px">
       <el-form-item label="姓名：" prop="name">
         <el-input v-model="user.name" placeholder="请输入姓名..."/>

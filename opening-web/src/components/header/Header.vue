@@ -5,13 +5,13 @@
   <div class="header">
     <el-dropdown class="user" @command="handleCommand">
       <span class="el-dropdown-link">
-        <img :src="'/static/img/admin.png'">
+        <img :src="'/static/img/logo.png'">
         <!--<span>{{mine.name || mine.nickName || '管理员'}}</span>-->
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown" class="header-dropdown">
-        <el-dropdown-item command="info"><i class="el-icon-my-admin"/>我的资料</el-dropdown-item>
-        <el-dropdown-item command="password"><i class="el-icon-my-setting"/>修改密码</el-dropdown-item>
+        <el-dropdown-item command="info"><i class="el-icon-my-profilefill"/>我的资料</el-dropdown-item>
+        <el-dropdown-item command="password"><i class="el-icon-my-commandfill"/>修改密码</el-dropdown-item>
         <el-dropdown-item command="logout"><i class="el-icon-my-logout"/>退出登录</el-dropdown-item>
       </el-dropdown-menu>
     </el-dropdown>
@@ -125,7 +125,7 @@
     methods: {
       handleCommand(command) {
         if (command === 'info') {
-          this.dialog = {title: '我的资料', show: true, data: {avatar: '/static/img/admin.png', name: '', birthday: new Date().getTime(), sex: 1, email: '', phone: '', ...this.mine}}
+          this.dialog = {title: '我的资料', show: true, data: {avatar: '/static/img/logo.png', name: '', birthday: new Date().getTime(), sex: 1, email: '', phone: '', ...this.mine}}
         } else if (command === 'password') {
           this.dialog = {title: '修改密码', show: true, data: {pwd: '', old: ''}}
         } else if (command === 'logout') {
@@ -135,7 +135,7 @@
       changePassword(data) {
         this.$refs.form2.validate((valid) => {
           if (valid) {
-            changePasswordApi(data).then(() => success('密码修改成功！请重新登录...', {onClose: () => this.$router.push({name: 'login'})})).catch(({msg}) => error(msg))
+            changePasswordApi(data).then(() => success('密码修改成功！请重新登录...', {onClose: () => this.$router.push({path: 'login'})})).catch(({msg}) => error(msg))
           } else {
             return false
           }
