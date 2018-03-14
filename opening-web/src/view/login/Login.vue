@@ -6,7 +6,7 @@
   <div class="login_bg">
     <transition name="fade" mode="out-in">
       <div v-if="!show" class="login" key="login" @keyup.enter="submit">
-        <img class="img01" src="/static/img/logo_xxb.png">
+        <img class="img01" src="/static/img/logo.png">
         <img class="img02" src="/static/img/login_img.png">
         <div class="box">
           <div class="title">用户管理后台

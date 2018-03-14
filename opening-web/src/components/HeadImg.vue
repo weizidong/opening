@@ -4,7 +4,7 @@
   }
 </style>
 <template>
-  <img :src="src || '/static/img/admin.png'" :alt="alt" :style="{width:width+'px',height:height+'px'}"/>
+  <img :src="src || '/static/img/logo.png'" :alt="alt" :style="{width:width+'px',height:height+'px'}"/>
 </template>
 <script>
   export default {

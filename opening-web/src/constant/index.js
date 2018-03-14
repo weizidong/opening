@@ -1,8 +1,7 @@
 // TODO:该目录为静态变量及静态方法库
-export const TITLE = '学训宝后台'
+export const TITLE = '微信开盘系统'
 export const CREATE = 'create'
 export const ACTIVE_PATH = 'ACTIVE_PATH'
-export const ACCESS_TOKEN = 'ACCESS_TOKEN'
 export const icons = [
   'el-icon-upload',
   'el-icon-warning',
@@ -94,39 +93,3 @@ export const icons = [
   'el-icon-my-camerafill',
   'el-icon-my-locationfill',
 ]
-export const TEACHER_LEVEL = 'TEACHER_LEVEL'
-export const TEACHER_MENU = [{
-  icon: '',
-  name: '课程管理',
-  url: '/teacher/course/video',
-  children: [{
-    icon: '',
-    name: '视频课程',
-    url: '/teacher/course/video',
-  }, {
-    icon: '',
-    name: '直播课程',
-    url: '/teacher/course/liveRadio',
-  }, {
-    icon: '',
-    name: '线下课程',
-    url: '/teacher/course/line',
-  }],
-}, {
-  icon: '',
-  name: '机构管理',
-  url: '/teacher/institution/mine',
-  children: [{
-    icon: '',
-    name: '我的机构',
-    url: '/teacher/institution/mine',
-  }, {
-    icon: '',
-    name: '机构教师',
-    url: '/teacher/institution/teachers',
-  }],
-}, {
-  icon: '',
-  name: '直播工具下载',
-  url: 'http://www.xuexunbao.com.cn/livetool.html',
-}]

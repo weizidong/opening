@@ -61,7 +61,7 @@
         CREATE,
         roles: [],
         pickerOptions: {disabledDate: (time) => time.getTime() > Date.now()},
-        admin: {avatar: '/static/img/admin.png', account: '', password: null, name: '', birthday: new Date().getTime(), sex: 1, email: '', phone: '', status: 1, roles: []},
+        admin: {avatar: '/static/img/logo.png', account: '', password: null, name: '', birthday: new Date().getTime(), sex: 1, email: '', phone: '', status: 1, roles: []},
         rules: {
           account: [{required: true, message: '请输入账号...', trigger: 'blur'}, {min: 5, message: '长度大于5个字符...', trigger: 'blur'}],
           password: [{min: 6, message: '长度大于6个字符...', trigger: 'blur'}],
