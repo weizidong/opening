@@ -23,4 +23,8 @@ export default [
       {path: `user/add`, component: require('../view/user/Add.vue').default, name: 'userAdd', meta: {title: '登记认筹者'}},
     ],
   },
+  {
+    path: `/saling`,
+    component: require('../view/saling/Saling.vue').default,
+  }
 ]

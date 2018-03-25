@@ -12,6 +12,31 @@ public class HouseType implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    /**
+     * 户型名称
+     */
+    private String name;
+
+    /**
+     * 面积
+     */
+    private Double acreage;
+
+    /**
+     * 户型概述
+     */
+    private String describe;
+
+    /**
+     * 户型规格
+     */
+    private String spec;
+
+    /**
+     * 户型图
+     */
+    private String pics;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -32,6 +57,96 @@ public class HouseType implements Serializable {
         this.id = id;
     }
 
+    /**
+     * 获取户型名称
+     *
+     * @return name - 户型名称
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * 设置户型名称
+     *
+     * @param name 户型名称
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * 获取面积
+     *
+     * @return acreage - 面积
+     */
+    public Double getAcreage() {
+        return acreage;
+    }
+
+    /**
+     * 设置面积
+     *
+     * @param acreage 面积
+     */
+    public void setAcreage(Double acreage) {
+        this.acreage = acreage;
+    }
+
+    /**
+     * 获取户型概述
+     *
+     * @return describe - 户型概述
+     */
+    public String getDescribe() {
+        return describe;
+    }
+
+    /**
+     * 设置户型概述
+     *
+     * @param describe 户型概述
+     */
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    /**
+     * 获取户型规格
+     *
+     * @return spec - 户型规格
+     */
+    public String getSpec() {
+        return spec;
+    }
+
+    /**
+     * 设置户型规格
+     *
+     * @param spec 户型规格
+     */
+    public void setSpec(String spec) {
+        this.spec = spec;
+    }
+
+    /**
+     * 获取户型图
+     *
+     * @return pics - 户型图
+     */
+    public String getPics() {
+        return pics;
+    }
+
+    /**
+     * 设置户型图
+     *
+     * @param pics 户型图
+     */
+    public void setPics(String pics) {
+        this.pics = pics;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -39,6 +154,11 @@ public class HouseType implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
+        sb.append(", name=").append(name);
+        sb.append(", acreage=").append(acreage);
+        sb.append(", describe=").append(describe);
+        sb.append(", spec=").append(spec);
+        sb.append(", pics=").append(pics);
         sb.append("]");
         return sb.toString();
     }
@@ -55,7 +175,12 @@ public class HouseType implements Serializable {
             return false;
         }
         HouseType other = (HouseType) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()));
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+            && (this.getAcreage() == null ? other.getAcreage() == null : this.getAcreage().equals(other.getAcreage()))
+            && (this.getDescribe() == null ? other.getDescribe() == null : this.getDescribe().equals(other.getDescribe()))
+            && (this.getSpec() == null ? other.getSpec() == null : this.getSpec().equals(other.getSpec()))
+            && (this.getPics() == null ? other.getPics() == null : this.getPics().equals(other.getPics()));
     }
 
     @Override
@@ -63,6 +188,11 @@ public class HouseType implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getAcreage() == null) ? 0 : getAcreage().hashCode());
+        result = prime * result + ((getDescribe() == null) ? 0 : getDescribe().hashCode());
+        result = prime * result + ((getSpec() == null) ? 0 : getSpec().hashCode());
+        result = prime * result + ((getPics() == null) ? 0 : getPics().hashCode());
         return result;
     }
 }

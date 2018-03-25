@@ -21,10 +21,4 @@ import javax.ws.rs.core.MediaType;
 @ApiImplicitParams({@ApiImplicitParam(name = "ACCESS_TOKEN", value = "接口调用凭证", dataType = "string", required = true, paramType = "query")})
 @ApiResponses({@ApiResponse(code = 600, message = "登录状态失效")})
 public class ConfigApi extends com.qcdl.rest.api.ConfigApi {
-
-    @Override
-    @ApiOperation(value = "获取七牛上传文件配置", hidden = true)
-    public QiniuDto qiniu() {
-        return super.qiniu();
-    }
 }

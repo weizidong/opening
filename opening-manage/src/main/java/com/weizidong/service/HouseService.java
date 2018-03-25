@@ -1,16 +1,19 @@
 package com.weizidong.service;
 
+import com.github.pagehelper.PageInfo;
 import com.weizidong.model.dao.HouseDao;
 import com.weizidong.model.entity.House;
-import com.weizidong.model.entity.User;
+import com.weizidong.model.entity.HouseType;
 import com.weizidong.model.enums.SaleType;
 import org.restful.api.filter.exception.ResponseCode;
 import org.restful.api.filter.exception.WebException;
-import org.restful.api.utils.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 用户业务
@@ -23,40 +26,6 @@ public class HouseService {
     @Autowired
     private HouseDao houseDao;
 
-
-    /**
-     * 获取房源列表
-     *
-     * @param buildingNo 楼栋号
-     */
-    public List<House> find(Integer buildingNo) {
-        return houseDao.find(buildingNo);
-    }
-
-    /**
-     * 购买房子
-     *
-     * @param houseId 房子ID
-     * @param u       用户
-     */
-    public synchronized Map<String, Object> purchase(Integer houseId, User u) {
-        House h = houseDao.getById(houseId);
-        Assert.isFalse(h.getUserId() != null && h.getUserId() > 0, "该房产已被认购！");
-        House db = houseDao.getByUserId(u.getId());
-        if (db != null) {
-            throw new WebException(ResponseCode.参数错误.getCode(), "您已经认购了房产【" + db.getRoomNo() + "】,不能再次认购！");
-        }
-        h.setUserId(u.getId());
-        h.setStatus(SaleType.已售.getCode());
-        h.setSalesTime(new Date());
-        houseDao.update(h);
-        Map<String, Object> res = new HashMap<>(16);
-        res.put("phone", u.getPhone());
-        res.put("name", u.getName());
-        res.put("room", h.getRoomNo());
-        res.put("time", h.getSalesTime());
-        return res;
-    }
 
     /**
      * 批量录入房源
@@ -75,8 +44,7 @@ public class HouseService {
                     House h = new House();
                     h.setBuildingNo(b);
                     h.setFloorNo(f);
-                    h.setRoomNo(String.format("%d%02d%02d", b, f, r));
-                    h.setArea(area);
+                    h.setRoomNo(r);
                     h.setUnitPrice(unitPrice);
                     h.setTotalPrice(area * unitPrice);
                     h.setStatus(SaleType.未售.getCode());
@@ -87,41 +55,56 @@ public class HouseService {
         houseDao.create(houseList);
     }
 
-
     /**
-     * 获取指定用户认筹的房子
+     * 获取所有的房源
      *
-     * @param userId 用户ID
-     * @return 房源信息
+     * @return 房源列表
      */
-    public House getMine(Integer userId) {
-        if (userId == null || userId < 1) {
-            return null;
-        }
-        return houseDao.getByUserId(userId);
+    public Map<Integer, Map<Integer, List<House>>> all() {
+        List<House> houseList = houseDao.all();
+        Map<Integer, Map<Integer, List<House>>> res = new HashMap<>(16);
+        houseList.forEach((house) -> {
+            if (!res.containsKey(house.getBuildingNo())) {
+                res.put(house.getBuildingNo(), new HashMap<>(16));
+            }
+            Map<Integer, List<House>> build = res.get(house.getBuildingNo());
+            if (!build.containsKey(house.getFloorNo())) {
+                build.put(house.getFloorNo(), new ArrayList<>());
+            }
+            build.get(house.getFloorNo()).add(house);
+        });
+        return res;
     }
 
     /**
-     * 收藏指定的房产
-     *
-     * @param userId  用户ID
-     * @param houseId 房产ID
+     * 添加房型
      */
-    public void favorite(Integer userId, Integer houseId) {
-        Boolean flag = houseDao.checkFavorite(userId, houseId);
-        if (!flag) {
-            // 未收藏，创建收藏记录
-            houseDao.createFavorite(userId, houseId);
-        }
+    public void addType(HouseType type) {
+        type.setId(null);
+        houseDao.addType(type);
     }
 
     /**
-     * 删除指定用户的收藏记录
-     *
-     * @param houseId 房产ID
-     * @param userId  用户ID
+     * 获取房型列表
      */
-    public void delFavorite(Integer houseId, Integer userId) {
-        houseDao.delFavorite(houseId, userId);
+    public PageInfo<HouseType> listType() {
+        return new PageInfo<>(houseDao.listType());
+    }
+
+    /**
+     * 修改房型
+     */
+    public void updateType(HouseType param) {
+        houseDao.updateType(param);
+    }
+
+    /**
+     * 删除房型
+     */
+    public void deleteType(Integer id) {
+        if (houseDao.checkType(id)) {
+            throw new WebException(ResponseCode.存在子菜单.getCode(), "该房型正在被使用，无法删除！");
+        }
+        houseDao.deleteType(id);
     }
 }

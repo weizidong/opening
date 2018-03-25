@@ -51,6 +51,27 @@ public class UserService {
      * @return 用户列表
      */
     public PageInfo<User> list(PageParam param) {
-        return null;
+        return new PageInfo<>(userDao.list(param));
+    }
+
+    /**
+     * 修改用户数据
+     */
+    public void update(User param) {
+        User u = userDao.getById(param.getId());
+        u.setName(param.getName());
+        u.setPhone(param.getPhone());
+        u.setIdNumber(param.getIdNumber());
+        u.setAddress(param.getAddress());
+        userDao.updateById(u);
+    }
+
+    /**
+     * 删除用户数据
+     */
+    public void delete(Integer id) {
+        User u = userDao.getById(id);
+        u.setDeleted(DeleteStatus.已删除.getCode());
+        userDao.updateById(u);
     }
 }

@@ -35,8 +35,11 @@ Axios.interceptors.response.use((response) => {
     return data || response.data
   } else if (code !== 200) {
     const data = {code: code || 500, msg: msg || '服务器异常！请稍后重试...'}
-    error(data.msg)
-    code === 600 && router.replace({name: 'login'})
+    if (code === 600) {
+      router.replace({name: 'login'})
+    } else {
+      error(data.msg)
+    }
     return Promise.reject(data)
   }
 }, (error) => {

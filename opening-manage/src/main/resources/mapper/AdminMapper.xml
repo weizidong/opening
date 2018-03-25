@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qcdl.model.mapper.AdminMapper">
-    <resultMap id="BaseResultMap" type="com.qcdl.model.entity.Admin">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
-        <result column="account" jdbcType="VARCHAR" property="account"/>
-        <result column="password" jdbcType="CHAR" property="password"/>
-        <result column="salt" jdbcType="CHAR" property="salt"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="birthday" jdbcType="TIMESTAMP" property="birthday"/>
-        <result column="sex" jdbcType="INTEGER" property="sex"/>
-        <result column="email" jdbcType="VARCHAR" property="email"/>
-        <result column="phone" jdbcType="VARCHAR" property="phone"/>
-        <result column="status" jdbcType="INTEGER" property="status"/>
-        <result column="createtime" jdbcType="TIMESTAMP" property="createtime"/>
-        <result column="logintime" jdbcType="TIMESTAMP" property="logintime"/>
-    </resultMap>
+<mapper namespace="com.weizidong.model.mapper.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.weizidong.model.entity.Admin">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="salt" jdbcType="CHAR" property="salt" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="logintime" jdbcType="TIMESTAMP" property="logintime" />
+  </resultMap>
 </mapper>

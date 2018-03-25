@@ -1,5 +1,7 @@
 package com.weizidong.model.dao;
 
+import com.github.pagehelper.PageHelper;
+import com.qcdl.model.param.PageParam;
 import com.weizidong.model.entity.User;
 import com.weizidong.model.enums.DeleteStatus;
 import com.weizidong.model.mapper.UserMapper;
@@ -8,6 +10,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户持久化
@@ -48,31 +51,6 @@ public class UserDao {
     }
 
     /**
-     * 根据openid更新用户信息
-     *
-     * @param u 需要更新的用户资料
-     * @author 魏自东
-     * @date 2018/2/9 10:58
-     */
-    public void updateByOpenId(User u) {
-        Example e = new Example(User.class);
-        e.createCriteria().andEqualTo("openid", u.getOpenid());
-        userMapper.updateByExampleSelective(u, e);
-    }
-
-    /**
-     * 根据openid获取用户信息
-     *
-     * @param openid openid
-     * @return 用户信息
-     */
-    public User getByOpenId(String openid) {
-        User u = new User();
-        u.setOpenid(openid);
-        return userMapper.selectOne(u);
-    }
-
-    /**
      * 根据ID获取
      *
      * @param id id
@@ -88,6 +66,20 @@ public class UserDao {
      * @param user 用户信息
      */
     public void updateById(User user) {
+        user.setUpdateTime(new Date());
         userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    /**
+     * 获取列表
+     */
+    public List<User> list(PageParam param) {
+        Example e = new Example(User.class);
+        e.createCriteria().andEqualTo("deleted", DeleteStatus.未删除.getCode());
+        e.orderBy("createTime").desc();
+        if (param.getPageSize() != null && param.getPageSize() > 0) {
+            PageHelper.startPage(param.getPage(), param.getPageSize());
+        }
+        return userMapper.selectByExample(e);
     }
 }
