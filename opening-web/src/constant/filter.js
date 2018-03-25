@@ -29,3 +29,5 @@ export const defValFilter03 = (r, c, val) => val || 0
 export const statusFilter01 = (r, c, val) => ['未知', '待审核', '通过', '拒绝'][val] || '未知'
 // 货币显示格式化
 export const currencyFilter = (r, c, val) => val * 1 ? (val * 1).toFixed(2) : '0.00'
+// 面积格式化
+export const acreageFilter = (r, c, val) => val ? `${val}㎡` : '无'

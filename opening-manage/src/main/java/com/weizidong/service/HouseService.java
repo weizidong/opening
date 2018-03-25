@@ -87,8 +87,8 @@ public class HouseService {
     /**
      * 获取房型列表
      */
-    public PageInfo<HouseType> listType() {
-        return new PageInfo<>(houseDao.listType());
+    public List<HouseType> listType() {
+        return houseDao.listType();
     }
 
     /**

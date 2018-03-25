@@ -21,6 +21,12 @@ export default [
       {path: `system/menu`, component: require('../view/system/menu/MenuList.vue').default, name: 'menuList', meta: {title: '权限菜单'}},
       // 登记认筹者
       {path: `user/add`, component: require('../view/user/Add.vue').default, name: 'userAdd', meta: {title: '登记认筹者'}},
+      // 房型管理
+      {path: `houseType`, component: require('../view/houseType/HouseType.vue').default, name: 'houseType', meta: {title: '房型管理'}},
+      // 房源管理
+      {path: `house`, component: require('../view/house/House.vue').default, name: 'house', meta: {title: '房源管理'}},
+      // 开盘总控
+      {path: `open`, component: require('../view/open/Open.vue').default, name: 'open', meta: {title: '开盘总控'}},
     ],
   },
   {

@@ -38,11 +38,11 @@ public class HouseApi {
     public void addType(HouseType type) {
         houseService.addType(type);
     }
-    
+
     @GET
     @Path("/listType")
     @Authority({"houseType"})
-    public PageInfo<HouseType> listType() {
+    public List<HouseType> listType() {
         return houseService.listType();
     }
 

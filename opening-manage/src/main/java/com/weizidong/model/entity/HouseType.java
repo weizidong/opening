@@ -25,7 +25,7 @@ public class HouseType implements Serializable {
     /**
      * 户型概述
      */
-    private String describe;
+    private String description;
 
     /**
      * 户型规格
@@ -96,19 +96,19 @@ public class HouseType implements Serializable {
     /**
      * 获取户型概述
      *
-     * @return describe - 户型概述
+     * @return description - 户型概述
      */
-    public String getDescribe() {
-        return describe;
+    public String getDescription() {
+        return description;
     }
 
     /**
      * 设置户型概述
      *
-     * @param describe 户型概述
+     * @param description 户型概述
      */
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
@@ -156,7 +156,7 @@ public class HouseType implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", name=").append(name);
         sb.append(", acreage=").append(acreage);
-        sb.append(", describe=").append(describe);
+        sb.append(", description=").append(description);
         sb.append(", spec=").append(spec);
         sb.append(", pics=").append(pics);
         sb.append("]");
@@ -178,7 +178,7 @@ public class HouseType implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getAcreage() == null ? other.getAcreage() == null : this.getAcreage().equals(other.getAcreage()))
-            && (this.getDescribe() == null ? other.getDescribe() == null : this.getDescribe().equals(other.getDescribe()))
+            && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
             && (this.getSpec() == null ? other.getSpec() == null : this.getSpec().equals(other.getSpec()))
             && (this.getPics() == null ? other.getPics() == null : this.getPics().equals(other.getPics()));
     }
@@ -190,7 +190,7 @@ public class HouseType implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getAcreage() == null) ? 0 : getAcreage().hashCode());
-        result = prime * result + ((getDescribe() == null) ? 0 : getDescribe().hashCode());
+        result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
         result = prime * result + ((getSpec() == null) ? 0 : getSpec().hashCode());
         result = prime * result + ((getPics() == null) ? 0 : getPics().hashCode());
         return result;
