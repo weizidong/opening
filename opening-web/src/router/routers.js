@@ -24,7 +24,7 @@ export default [
       // 房型管理
       {path: `houseType`, component: require('../view/houseType/HouseType.vue').default, name: 'houseType', meta: {title: '房型管理'}},
       // 房源管理
-      {path: `house`, component: require('../view/house/House.vue').default, name: 'house', meta: {title: '房源管理'}},
+      {path: `houses`, component: require('../view/house/House.vue').default, name: 'house', meta: {title: '房源管理'}},
       // 开盘总控
       {path: `open`, component: require('../view/open/Open.vue').default, name: 'open', meta: {title: '开盘总控'}},
     ],
