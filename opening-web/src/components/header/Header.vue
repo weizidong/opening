@@ -10,7 +10,7 @@
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown" class="header-dropdown">
-        <el-dropdown-item command="info"><i class="el-icon-my-profilefill"/>我的资料</el-dropdown-item>
+        <!--<el-dropdown-item command="info"><i class="el-icon-my-profilefill"/>我的资料</el-dropdown-item>-->
         <el-dropdown-item command="password"><i class="el-icon-my-commandfill"/>修改密码</el-dropdown-item>
         <el-dropdown-item command="logout"><i class="el-icon-my-logout"/>退出登录</el-dropdown-item>
       </el-dropdown-menu>

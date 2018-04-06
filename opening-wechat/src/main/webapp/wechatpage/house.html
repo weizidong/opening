@@ -193,9 +193,11 @@
     })
     // 获取开始时间
     var timmer;
+    var startTime;
     ajax('/rest/system/get/START_TIME', {
         type: 'GET',
         success: function (time) {
+            startTime = time
             setTime(time)
         }
     })
@@ -300,6 +302,8 @@
                                 var agree = document.getElementById("mySwitch").classList.contains("mui-active");
                                 if (!agree) {
                                     mui.toast('认购房产需要同意微信选房协议！')
+                                } else if (startTime > Date.now()) {
+                                    mui.toast('认购还未开始！')
                                 } else {
                                     ajax('/rest/house/purchase/' + item.id, {
                                         type: 'PUT',
@@ -315,8 +319,8 @@
                                                     location.href = 'me.html'
                                                 })
                                         },
-                                        error: function () {
-                                            mui.toast('认购房产【' + item.roomNo + '】失败！')
+                                        error: function (msg) {
+                                            mui.toast(msg || ('认购房产【' + item.roomNo + '】失败！'))
                                         }
                                     })
                                 }
@@ -325,8 +329,8 @@
                                     type: 'PUT',
                                     success: function () {
                                         mui.toast('收藏房源【' + item.roomNo + '】成功！')
-                                    }, error: function () {
-                                        mui.toast('收藏房源【' + item.roomNo + '】失败！')
+                                    }, error: function (msg) {
+                                        mui.toast(msg || ('收藏房源【' + item.roomNo + '】失败！'))
                                     }
                                 })
                             }

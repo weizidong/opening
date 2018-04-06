@@ -21,7 +21,7 @@ function ajax(url, config) {
 			if(data.code !== 200) {
 				// console.log('错误:', data)
 				mui.alert(data.msg, '提示', '确定', function() {
-					config.error && config.error();
+					config.error && config.error(data.msg);
 				})
 			} else {
 				// console.log('结果:', data.data)

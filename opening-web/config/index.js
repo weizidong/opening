@@ -11,7 +11,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/rest': {
-        target: 'http://localhost:8009',
+        target: 'http://localhost:8090',
         changeOrigin: true,
         pathRewrite: {
           '^/rest': '/rest'
@@ -44,9 +44,9 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../../opening-manage/src/main/webapp/index.html'),
+    index: path.resolve(__dirname, '../../opening-wechat/src/main/webapp/index.html'),
     // Paths
-    assetsRoot: path.resolve(__dirname, '../../opening-manage/src/main/webapp'),
+    assetsRoot: path.resolve(__dirname, '../../opening-wechat/src/main/webapp'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     /**
