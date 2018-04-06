@@ -3,12 +3,14 @@
 </style>
 <template>
   <div class="saling">
+    <div class="text-center">
+      <el-tag type="warning" class="title">销控中心</el-tag>
+    </div>
     <div v-for="(build,idx) in list" class="build">
-      <div class="build_no">
-        <el-tag type="success">{{idx}}号楼</el-tag>
-      </div>
-
       <el-card class="box-card">
+        <div slot="header" class="build_no text-center">
+          <el-tag type="success">{{idx}}号楼</el-tag>
+        </div>
         <div v-for="(floor,index) in build" class="floor item">
           <el-tag>{{index}}楼</el-tag>
           <div v-for="(house,i) in floor" class="house">
