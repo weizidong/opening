@@ -1,6 +1,6 @@
 <template>
     <div>
-      开盘总控
+      开盘总控开发中...
     </div>
 </template>
 
