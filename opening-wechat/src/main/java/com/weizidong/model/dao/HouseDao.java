@@ -2,8 +2,10 @@ package com.weizidong.model.dao;
 
 import com.weizidong.model.entity.Favorite;
 import com.weizidong.model.entity.House;
+import com.weizidong.model.entity.HouseType;
 import com.weizidong.model.mapper.FavoriteMapper;
 import com.weizidong.model.mapper.HouseMapper;
+import com.weizidong.model.mapper.HouseTypeMapper;
 import com.weizidong.rest.dto.HouseDto;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
@@ -24,6 +26,8 @@ public class HouseDao {
     private HouseMapper houseMapper;
     @Resource
     private FavoriteMapper favoriteMapper;
+    @Resource
+    private HouseTypeMapper houseTypeMapper;
 
     /**
      * 获取房源列表
@@ -32,12 +36,7 @@ public class HouseDao {
      * @return 房源列表
      */
     public List<House> find(Integer buildingNo) {
-        Example e = new Example(House.class);
-        Example.Criteria c = e.createCriteria();
-        c.andEqualTo("buildingNo", buildingNo);
-        e.orderBy("floorNo").asc();
-        e.orderBy("roomNo").asc();
-        return houseMapper.selectByExample(e);
+        return houseMapper.find(buildingNo);
     }
 
     /**
@@ -140,5 +139,42 @@ public class HouseDao {
      */
     public void update(House h) {
         houseMapper.updateByPrimaryKeySelective(h);
+    }
+
+
+    /**
+     * 获取全部房源
+     *
+     * @return 房源列表
+     */
+    public List<House> all() {
+        Example e = new Example(House.class);
+        e.orderBy("buildingNo").asc().orderBy("floorNo").asc();
+        return houseMapper.selectByExample(e);
+    }
+
+    /**
+     * 获取房型列表
+     */
+    public List<HouseType> listType() {
+        return houseTypeMapper.selectAll();
+    }
+
+    public void updateType(HouseType param) {
+        houseTypeMapper.updateByPrimaryKeySelective(param);
+    }
+
+    public void deleteType(Integer id) {
+        houseTypeMapper.deleteByPrimaryKey(id);
+    }
+
+    public boolean checkType(Integer id) {
+        House h = new House();
+        h.setHouseType(id);
+        return houseMapper.selectCount(h) > 0;
+    }
+
+    public void addType(HouseType type) {
+        houseTypeMapper.insertSelective(type);
     }
 }

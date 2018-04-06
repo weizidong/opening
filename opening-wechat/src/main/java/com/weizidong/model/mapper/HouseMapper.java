@@ -27,4 +27,14 @@ public interface HouseMapper extends Mapper<House>, MySqlMapper<House> {
      * @return 收藏的房源列表
      */
     List<HouseDto> getFavorite(@Param("userId") Integer userId);
+
+    /**
+     * 获取房源列表
+     *
+     * @param buildingNo 楼栋号
+     * @return 房源列表
+     * @author 魏自东
+     * @date 2018/4/6 0006 15:02
+     */
+    List<House> find(@Param("buildingNo") Integer buildingNo);
 }

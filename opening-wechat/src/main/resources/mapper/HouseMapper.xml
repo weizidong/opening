@@ -8,11 +8,10 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="building_no" jdbcType="INTEGER" property="buildingNo"/>
         <result column="floor_no" jdbcType="INTEGER" property="floorNo"/>
-        <result column="room_no" jdbcType="VARCHAR" property="roomNo"/>
+        <result column="room_no" jdbcType="INTEGER" property="roomNo"/>
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
         <result column="house_type" jdbcType="INTEGER" property="houseType"/>
         <result column="sales_time" jdbcType="TIMESTAMP" property="salesTime"/>
-        <result column="area" jdbcType="DOUBLE" property="area"/>
         <result column="unit_price" jdbcType="DOUBLE" property="unitPrice"/>
         <result column="total_price" jdbcType="DOUBLE" property="totalPrice"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
@@ -25,10 +24,23 @@
     </select>
     <resultMap id="HouseDtoMap" type="com.weizidong.rest.dto.HouseDto" extends="BaseResultMap">
         <result column="count" jdbcType="INTEGER" property="count"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="acreage" jdbcType="DOUBLE" property="acreage"/>
+        <result column="spec" jdbcType="VARCHAR" property="spec"/>
     </resultMap>
     <select id="getFavorite" resultMap="HouseDtoMap">
-        SELECT h.*,count(house_id) AS `count` FROM favorite f LEFT JOIN house h ON f.house_id = h.id and f.house_id in (
-        SELECT house_id FROM favorite WHERE user_id = #{userId}
-        ) GROUP BY house_id
+        SELECT h.*,t.name,t.acreage,t.spec,f.count
+        FROM (SELECT f1.house_id,count(f2.id) AS `count` FROM favorite f1 INNER JOIN favorite f2 ON f1.house_id = f2.house_id WHERE f1.user_id = #{userId} GROUP BY f1.house_id) f
+        LEFT JOIN house h ON f.house_id = h.id
+        LEFT JOIN  house_type t ON h.house_type = t.id
+    </select>
+    <resultMap id="HouseMap" type="com.weizidong.model.entity.House" extends="BaseResultMap">
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="acreage" jdbcType="DOUBLE" property="acreage"/>
+        <result column="spec" jdbcType="VARCHAR" property="spec"/>
+    </resultMap>
+    <select id="find" resultMap="HouseMap">
+      SELECT h.*,t.name,t.acreage,t.spec FROM house h LEFT JOIN house_type t ON h.house_type = t.id
+      WHERE h.building_no = #{buildingNo} ORDER BY h.floor_no,h.room_no
     </select>
 </mapper>

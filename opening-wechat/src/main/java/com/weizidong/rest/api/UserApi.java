@@ -1,7 +1,11 @@
 package com.weizidong.rest.api;
 
+import com.github.pagehelper.PageInfo;
+import com.qcdl.model.entity.Admin;
+import com.qcdl.model.param.PageParam;
 import com.weizidong.model.entity.User;
 import com.weizidong.service.UserService;
+import org.restful.api.filter.authority.Authority;
 import org.restful.api.session.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -55,5 +59,35 @@ public class UserApi {
         db.setIdNumber(user.getIdNumber());
         db.setId(user.getId());
         userService.bind(db);
+    }
+
+
+    @POST
+    @Path("/add")
+    @Authority({"user"})
+    public String add(User user, @Context HttpServletRequest request) {
+        Admin a = SessionUtil.getUser(request, Admin.class);
+        return userService.add(user, a.getId());
+    }
+
+    @POST
+    @Path("/list")
+    @Authority({"user-admin"})
+    public PageInfo<User> list(PageParam param) {
+        return userService.list(param);
+    }
+
+    @PUT
+    @Path("/update")
+    @Authority({"user-admin"})
+    public void update(User param) {
+        userService.update(param);
+    }
+
+    @DELETE
+    @Path("/delete/{id}")
+    @Authority({"user-admin"})
+    public void delete(@PathParam("id") Integer id) {
+        userService.delete(id);
     }
 }

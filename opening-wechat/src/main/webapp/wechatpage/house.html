@@ -267,7 +267,7 @@
                             '<span class="mui-badge ' + (['mui-badge-primary', 'mui-badge-purple', ''][item.status]) + '">' + (['未售', '已售', '未推'][item.status]) + '</span>' +
                             '<div class="house mui-card-content ' + (['mui-badge-green', 'mui-badge-danger', ''][item.status]) + '">' +
                             '<div>房号：' + item.roomNo + '</div>' +
-                            '<div>面积：' + item.area + '㎡</div>' +
+                            '<div>面积：' + item.acreage + '㎡</div>' +
                             '<div>单价：' + item.unitPrice + '元</div>' +
                             '<div>总价：' + (item.totalPrice / 10000) + '万</div></div></div></div>'
                     })
@@ -286,11 +286,11 @@
                     }
                     mui.confirm('<div class="mui-text-left">\
 								<div class="mui-input-row"><label>房号：</label><div>' + item.roomNo + '</div></div>\
-								<div class="mui-input-row"><label>户型图：</label><div>户型 </div></div>\
-								<div class="mui-input-row"><label>户型：</label><div>三室两厅 </div></div>\
+								<div class="mui-input-row"><label>户型：</label><div>' + item.name + '</div></div>\
+								<div class="mui-input-row"><label>规格：</label><div>' + item.spec + '</div></div>\
 								<div class="mui-input-row"><label>状态：</label><div>' + (['未售', '已售', '未推'][item.status]) + ' </div></div>\
 								<div class="mui-input-row"><label>单价：</label><div>' + item.unitPrice + '元 </div></div>\
-								<div class="mui-input-row"><label>面积：</label><div>' + item.area + '㎡ </div></div>\
+								<div class="mui-input-row"><label>面积：</label><div>' + item.acreage + '㎡ </div></div>\
 								<div class="mui-input-row"><label>总价：</label><div>' + (item.totalPrice / 10000) + '万 </div></div>\
 								<div class="mui-input-row"><div class="mui-switch mui-switch-mini" id="mySwitch" style="float: left"><div class="mui-switch-handle"></div></div>\
 								<div>本人已阅读并同意<a href="agreement.html" id="agreementHtml">微信选房协议</a></div></div>\
@@ -339,10 +339,6 @@
     }
 
     // 获取楼层房间
-    mui('.mui-slider .mui-slider-indicator').on('tap', '.mui-control-item', function () {
-        var tid = this.getAttribute('tid');
-        find(tid)
-    })
     document.querySelector('.mui-slider').addEventListener('slide', function (event) {
         var dom = mui('.mui-slider .mui-slider-indicator .mui-control-item:nth-child(' + (event.detail.slideNumber + 1) + ')')[0]
         var tid = dom.getAttribute('tid')

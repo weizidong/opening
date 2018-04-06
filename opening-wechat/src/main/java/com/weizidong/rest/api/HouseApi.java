@@ -1,9 +1,11 @@
 package com.weizidong.rest.api;
 
 import com.weizidong.model.entity.House;
+import com.weizidong.model.entity.HouseType;
 import com.weizidong.model.entity.User;
 import com.weizidong.rest.dto.HouseDto;
 import com.weizidong.service.HouseService;
+import org.restful.api.filter.authority.Authority;
 import org.restful.api.session.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -77,5 +79,40 @@ public class HouseApi {
         res.put("user", u);
         res.put("house", h);
         return res;
+    }
+
+    @GET
+    @Path("/all")
+    public Map<Integer, Map<Integer, List<House>>> all() {
+        return houseService.all();
+    }
+
+
+    @POST
+    @Path("/addType")
+    @Authority({"houseType"})
+    public void addType(HouseType type) {
+        houseService.addType(type);
+    }
+
+    @GET
+    @Path("/listType")
+    @Authority({"houseType"})
+    public List<HouseType> listType() {
+        return houseService.listType();
+    }
+
+    @PUT
+    @Path("/updateType")
+    @Authority({"houseType"})
+    public void updateType(HouseType param) {
+        houseService.updateType(param);
+    }
+
+    @DELETE
+    @Path("/deleteType/{id}")
+    @Authority({"houseType"})
+    public void deleteType(@PathParam("id") Integer id) {
+        houseService.deleteType(id);
     }
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qcdl.model.mapper.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.qcdl.model.entity.Menu">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="levels" jdbcType="INTEGER" property="levels" />
+    <result column="ismenu" jdbcType="INTEGER" property="ismenu" />
+    <result column="tips" jdbcType="VARCHAR" property="tips" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+    <select id="findByRid" resultType="com.qcdl.model.entity.Menu">
+        SELECT m.*
+        FROM role_menu rm LEFT JOIN menu m ON rm.mid = m.id
+        WHERE rm.rid = #{rid} AND m.name IS NOT NULL
+        ORDER BY m.id
+    </select>
+    <select id="findByRids" resultType="com.qcdl.model.entity.Menu">
+        SELECT DISTINCT m.* FROM role_menu rm LEFT JOIN menu m ON rm.mid = m.id
+        <where>
+            m.name IS NOT NULL AND m.status = 1
+            <if test="pid != null">
+                AND m.pid = #{pid}
+            </if>
+            <if test="rids != null and rids.size &gt; 0">
+                AND rm.rid IN
+                <foreach close=")" collection="rids" item="rid" open="(" separator=",">
+                    #{rid}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY m.num
+    </select>
+</mapper>

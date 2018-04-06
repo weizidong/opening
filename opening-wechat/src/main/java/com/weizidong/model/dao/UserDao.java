@@ -1,5 +1,7 @@
 package com.weizidong.model.dao;
 
+import com.github.pagehelper.PageHelper;
+import com.qcdl.model.param.PageParam;
 import com.weizidong.model.entity.User;
 import com.weizidong.model.enums.DeleteStatus;
 import com.weizidong.model.mapper.UserMapper;
@@ -8,6 +10,7 @@ import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户持久化
@@ -82,12 +85,27 @@ public class UserDao {
         return userMapper.selectByPrimaryKey(id);
     }
 
+
     /**
      * 根据ID更新
      *
      * @param user 用户信息
      */
     public void updateById(User user) {
+        user.setUpdateTime(new Date());
         userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    /**
+     * 获取列表
+     */
+    public List<User> list(PageParam param) {
+        Example e = new Example(User.class);
+        e.createCriteria().andEqualTo("deleted", DeleteStatus.未删除.getCode());
+        e.orderBy("createTime").desc();
+        if (param.getPageSize() != null && param.getPageSize() > 0) {
+            PageHelper.startPage(param.getPage(), param.getPageSize());
+        }
+        return userMapper.selectByExample(e);
     }
 }
