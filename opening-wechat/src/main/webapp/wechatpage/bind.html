@@ -65,20 +65,22 @@
 </div>
 <script src="js/mui.min.js"></script>
 <script src="js/app.js"></script>
-<script type="application/javascript">
+<script>
     mui.init({})
-    var id = getQuery().id
-    ajax('/rest/user/get/' + id, {
-        type: 'GET',
-        success: function (data) {
-            if (data.openid) {
-                location.href = 'house.html'
+    mui.ready(function () {
+        var id = getQuery().id
+        ajax('/rest/user/get/' + id, {
+            type: 'GET',
+            success: function (data) {
+                if (data.openid) {
+                    location.href = 'house.html'
+                }
+                if (data) {
+                    mui('#name')[0].setAttribute('placeholder', data.name || '未知')
+                    mui('#phone')[0].setAttribute('placeholder', data.phone ? data.phone.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2') : '未知')
+                }
             }
-            if (data) {
-                mui('#name')[0].setAttribute('placeholder', data.name || '未知')
-                mui('#phone')[0].setAttribute('placeholder', data.phone ? data.phone.replace(/^(\d{3})\d{4}(\d{4})$/, '$1****$2') : '未知')
-            }
-        }
+        })
     })
     mui('body').on('tap', '#bind', function () {
         var idNumber = mui('#idNumber')[0].value

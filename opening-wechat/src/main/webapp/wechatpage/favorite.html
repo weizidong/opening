@@ -98,12 +98,15 @@
     // 获取开始时间
     var timmer;
     var startTime
-    ajax('/rest/system/get/START_TIME', {
-        type: 'GET',
-        success: function (time) {
-            startTime = time
-            setTime(time)
-        }
+    mui.ready(function () {
+        ajax('/rest/system/get/START_TIME', {
+            type: 'GET',
+            success: function (time) {
+                startTime = time
+                setTime(time)
+            }
+        })
+        getFavorite()
     })
 
     function setTime(time) {
@@ -134,7 +137,6 @@
     })
 
     // 获取我的收藏
-    getFavorite()
     var list = [];
 
     function getFavorite() {

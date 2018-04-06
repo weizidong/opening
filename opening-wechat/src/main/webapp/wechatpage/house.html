@@ -194,12 +194,32 @@
     // 获取开始时间
     var timmer;
     var startTime;
-    ajax('/rest/system/get/START_TIME', {
-        type: 'GET',
-        success: function (time) {
-            startTime = time
-            setTime(time)
-        }
+    mui.ready(function () {
+        ajax('/rest/system/get/START_TIME', {
+            type: 'GET',
+            success: function (time) {
+                startTime = time
+                setTime(time)
+            }
+        })
+        ajax('/rest/house/getBuilding', {
+            type: 'GET',
+            success: function (data) {
+                var html = ''
+                var html2 = ''
+                data.forEach(function (i) {
+                    html += '<a class="mui-control-item" href="#item' + i + '" tid="' + i + '">' + i + '号楼</a>'
+                    html2 += '<div id="item' + i + '" class="mui-slider-item mui-control-content"><div class="mui-scroll-wrapper"><div class="mui-scroll"><ul class="mui-table-view"></ul></div></div></div>'
+                })
+                mui('.mui-slider .mui-slider-indicator')[0].innerHTML = html
+                mui('.mui-slider-group')[0].innerHTML = html2
+                mui.init({})
+                mui('.mui-scroll-wrapper').scroll({
+                    deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+                })
+                find(data[0])
+            }
+        })
     })
 
     function setTime(time) {
@@ -226,24 +246,6 @@
     }
 
     // 获取楼栋号
-    ajax('/rest/house/getBuilding', {
-        type: 'GET',
-        success: function (data) {
-            var html = ''
-            var html2 = ''
-            data.forEach(function (i) {
-                html += '<a class="mui-control-item" href="#item' + i + '" tid="' + i + '">' + i + '号楼</a>'
-                html2 += '<div id="item' + i + '" class="mui-slider-item mui-control-content"><div class="mui-scroll-wrapper"><div class="mui-scroll"><ul class="mui-table-view"></ul></div></div></div>'
-            })
-            mui('.mui-slider .mui-slider-indicator')[0].innerHTML = html
-            mui('.mui-slider-group')[0].innerHTML = html2
-            mui.init({})
-            mui('.mui-scroll-wrapper').scroll({
-                deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-            })
-            find(data[0])
-        }
-    })
     var list = {}
 
     function find(tid) {
