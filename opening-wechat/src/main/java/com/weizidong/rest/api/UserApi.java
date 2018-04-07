@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.qcdl.model.entity.Admin;
 import com.qcdl.model.param.PageParam;
 import com.weizidong.model.entity.User;
+import com.weizidong.rest.dto.UserHouseDto;
 import com.weizidong.service.UserService;
 import org.restful.api.filter.authority.Authority;
 import org.restful.api.session.SessionUtil;
@@ -68,6 +69,13 @@ public class UserApi {
     public String add(User user, @Context HttpServletRequest request) {
         Admin a = SessionUtil.getUser(request, Admin.class);
         return userService.add(user, a.getId());
+    }
+
+    @POST
+    @Path("/user-list")
+    @Authority({"user-list"})
+    public PageInfo<UserHouseDto> userList(PageParam param) {
+        return userService.userList(param);
     }
 
     @POST

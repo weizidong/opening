@@ -5,6 +5,7 @@ import com.qcdl.model.param.PageParam;
 import com.weizidong.model.entity.User;
 import com.weizidong.model.enums.DeleteStatus;
 import com.weizidong.model.mapper.UserMapper;
+import com.weizidong.rest.dto.UserHouseDto;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
@@ -108,4 +109,5 @@ public class UserDao {
         }
         return userMapper.selectByExample(e);
     }
+
 }

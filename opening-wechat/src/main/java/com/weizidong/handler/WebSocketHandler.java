@@ -1,6 +1,7 @@
 package com.weizidong.handler;
 
 import org.restful.api.websocket.BaseWebSocket;
+import org.restful.api.websocket.SocketMsg;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.server.standard.SpringConfigurator;
 
@@ -16,6 +17,6 @@ import javax.websocket.server.ServerEndpoint;
 public class WebSocketHandler extends BaseWebSocket {
     @Override
     public void push(String userId, String socketMsg, Session session) {
-
+        BaseWebSocket.sendMessageToUser(userId, new SocketMsg(socketMsg));
     }
 }

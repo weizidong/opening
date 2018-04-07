@@ -63,12 +63,12 @@
         </div>
     </form>
 </div>
-<script src="js/mui.min.js"></script>
-<script src="js/app.js"></script>
-<script>
+<script src="./js/mui.min.js"></script>
+<script src="./js/app.js"></script>
+<script type="application/javascript">
     mui.init({})
+    var id = getQuery().id
     mui.ready(function () {
-        var id = getQuery().id
         ajax('/rest/user/get/' + id, {
             type: 'GET',
             success: function (data) {
@@ -99,7 +99,7 @@
                 location.href = 'agreement.html'
             },
             error: function (msg) {
-                mui.toast(msg || ('绑定身份失败！')
+                mui.toast(msg || ('绑定身份失败！'))
                 mui('#idNumber')[0].value = ''
             }
         })

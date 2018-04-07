@@ -2,6 +2,7 @@ package com.weizidong.model.mapper;
 
 import com.weizidong.model.entity.House;
 import com.weizidong.rest.dto.HouseDto;
+import com.weizidong.rest.dto.UserHouseDto;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.common.MySqlMapper;
@@ -37,4 +38,10 @@ public interface HouseMapper extends Mapper<House>, MySqlMapper<House> {
      * @date 2018/4/6 0006 15:02
      */
     List<House> find(@Param("buildingNo") Integer buildingNo);
+
+    /**
+     * 获取认筹者
+     * @return 认筹列表
+     */
+    List<UserHouseDto> userList();
 }

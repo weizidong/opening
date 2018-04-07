@@ -43,4 +43,15 @@
       SELECT h.*,t.name,t.acreage,t.spec FROM house h LEFT JOIN house_type t ON h.house_type = t.id
       WHERE h.building_no = #{buildingNo} ORDER BY h.floor_no,h.room_no
     </select>
+    <resultMap id="UserHouseDtoMap" type="com.weizidong.rest.dto.UserHouseDto" extends="BaseResultMap">
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="id_number" jdbcType="VARCHAR" property="idNumber"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+    </resultMap>
+    <select id="userList" resultMap="UserHouseDtoMap">
+      SELECT h.*,u.address,u.name,u.id_number,u.phone FROM house h LEFT JOIN `user` u ON h.user_id = u.id
+      WHERE h.user_id IS NOT NULL
+    </select>
+
 </mapper>

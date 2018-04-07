@@ -1,5 +1,7 @@
 package com.weizidong.model.dao;
 
+import com.github.pagehelper.PageHelper;
+import com.qcdl.model.param.PageParam;
 import com.weizidong.model.entity.Favorite;
 import com.weizidong.model.entity.House;
 import com.weizidong.model.entity.HouseType;
@@ -7,6 +9,7 @@ import com.weizidong.model.mapper.FavoriteMapper;
 import com.weizidong.model.mapper.HouseMapper;
 import com.weizidong.model.mapper.HouseTypeMapper;
 import com.weizidong.rest.dto.HouseDto;
+import com.weizidong.rest.dto.UserHouseDto;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
@@ -176,5 +179,17 @@ public class HouseDao {
 
     public void addType(HouseType type) {
         houseTypeMapper.insertSelective(type);
+    }
+    /**
+     * 获取列表
+     *
+     * @param param 分页参数
+     * @return 认筹者列表
+     */
+    public List<UserHouseDto> userList(PageParam param) {
+        if (param.getPageSize() != null && param.getPageSize() > 0) {
+            PageHelper.startPage(param.getPage(), param.getPageSize());
+        }
+        return houseMapper.userList();
     }
 }

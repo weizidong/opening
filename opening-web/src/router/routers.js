@@ -21,6 +21,8 @@ export default [
       {path: `system/menu`, component: require('../view/system/menu/MenuList.vue').default, name: 'menuList', meta: {title: '权限菜单'}},
       // 登记认筹者
       {path: `user/add`, component: require('../view/user/Add.vue').default, name: 'userAdd', meta: {title: '登记认筹者'}},
+      // 登记认筹者
+      {path: `user/list`, component: require('../view/user/List.vue').default, name: 'userAdd', meta: {title: '认筹记录'}},
       // 房型管理
       {path: `houseType`, component: require('../view/houseType/HouseType.vue').default, name: 'houseType', meta: {title: '房型管理'}},
       // 房源管理

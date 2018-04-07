@@ -1,5 +1,6 @@
 // WebSocket 封装
 export default {
+  debug: true,// 开启debug模式
   socket: null,
   url: null,// 连接地址
   waitTime: 500,// 重连等待时间
@@ -11,15 +12,21 @@ export default {
   connectTime: 0,// 连接次数
   loopTimer: null,// 心跳定时器
   onMessage: (msg) => { // 消息监听
-    console.info(`接收到 WebSocket 消息：${msg}`)
+    this.log(`接收到 WebSocket 消息：${msg}`)
   },
-  init(url, {waitTime = 500, reConnect = true, loop = true, loopData = '@heart', loopTime = 10000, reConnectTime = 10} = {}) {
+  log(...msg) {
+    if (this.debug) {
+      console.log(...msg)
+    }
+  },
+  init(url, {waitTime = 500, reConnect = true, loop = true, loopData = '@heart', loopTime = 10000, reConnectTime = 10, debug = false} = {}) {
     this.waitTime = waitTime
     this.reConnect = reConnect
     this.loop = loop
     this.loopData = loopData
     this.loopTime = loopTime
     this.reConnectTime = reConnectTime
+    this.debug = debug
     this.open(url)
     return this
   },
@@ -35,7 +42,7 @@ export default {
     this.socket = new WebSocket(url)
     this.socket.onmessage = (event) => {
       const data = JSON.parse(event.data)
-      console.log(`WebSocket 接收到消息：${data}`)
+      this.log(`WebSocket 接收到消息：${data}`)
       if (data === this.loopData) {
         this.sendLoop()
       } else {
@@ -43,16 +50,16 @@ export default {
       }
     }
     this.socket.onopen = () => {
-      console.log(`WebSocket 连接成功！目标：${this.url}`)
+      this.log(`WebSocket 连接成功！目标：${this.url}`)
       this.loop && this.sendLoop()
     }
     this.socket.onclose = () => {
-      console.log(`WebSocket 连接已关闭！目标：${this.url}`)
+      this.log(`WebSocket 连接已关闭！目标：${this.url}`)
       this.loopTimer && clearTimeout(this.loopTimer)
       this.reConnect && this.open(this.url)
     }
     this.socket.onerror = (event) => {
-      console.log(`WebSocket 连接错误！目标：${event}`)
+      this.log(`WebSocket 连接错误！目标：${event}`)
       this.reConnect && this.open(this.url)
     }
   },
@@ -62,7 +69,7 @@ export default {
   },
   sendLoop() {
     if (this.loop) {
-      console.log(`发送心跳数据${this.loopData}...`)
+      this.log(`发送心跳数据${this.loopData}...`)
       this.loopTimer = setTimeout(() => this.send(this.loopData), this.loopTime)
     }
   },
@@ -75,6 +82,8 @@ export default {
       setTimeout(() => {
         this.send(msg)
       }, this.waitTime)
+    } else if (!this.socket.readyState) {
+      setTimeout(() => this.socket.send(msg), 500)
     } else {
       this.socket.send(msg)
     }

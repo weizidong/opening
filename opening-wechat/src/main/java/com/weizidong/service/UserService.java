@@ -2,9 +2,11 @@ package com.weizidong.service;
 
 import com.github.pagehelper.PageInfo;
 import com.qcdl.model.param.PageParam;
+import com.weizidong.model.dao.HouseDao;
 import com.weizidong.model.dao.UserDao;
 import com.weizidong.model.entity.User;
 import com.weizidong.model.enums.DeleteStatus;
+import com.weizidong.rest.dto.UserHouseDto;
 import com.weizidong.utils.WechatConfigs;
 import org.apache.commons.lang3.StringUtils;
 import org.restful.api.session.SessionUtil;
@@ -27,6 +29,8 @@ import java.util.Date;
 public class UserService {
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private HouseDao houseDao;
     private static PropertiesUtil pu = new PropertiesUtil("/configs/config.properties");
 
     /**
@@ -79,6 +83,7 @@ public class UserService {
         u.setDeleted(DeleteStatus.已删除.getCode());
         userDao.updateById(u);
     }
+
     /**
      * 检查是否存在该openid
      *
@@ -154,5 +159,15 @@ public class UserService {
      */
     public User getById(Integer id) {
         return userDao.getById(id);
+    }
+
+    /**
+     * 获取认筹记录
+     *
+     * @param param 分页参数
+     * @return 认筹记录
+     */
+    public PageInfo<UserHouseDto> userList(PageParam param) {
+        return new PageInfo<>(houseDao.userList(param));
     }
 }

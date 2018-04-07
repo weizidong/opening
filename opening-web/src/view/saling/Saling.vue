@@ -14,7 +14,7 @@
         <div v-for="(floor,index) in build" class="floor item">
           <el-tag>{{index}}楼</el-tag>
           <div v-for="(house,i) in floor" class="house">
-            <el-tag type="info">{{house.roomNo}}</el-tag>
+            <el-tag :type="house.userId?'danger':'info'">{{house.roomNo}}</el-tag>
           </div>
         </div>
       </el-card>
@@ -39,7 +39,13 @@
         this.list = list
       })
       mineApi().then((user) => {
-        webSocket.init(`ws://${location.host}/websocket/${user.id}`)
+        // webSocket.init(`ws://${location.host}/websocket/${user.id}`, {debug: true})
+        webSocket.init(`ws://localhost:8090/websocket/${user.id}`, {debug: true})
+        webSocket.onMessage = (msg) => {
+          console.log('................')
+          console.log(msg)
+        }
+        webSocket.send('asdasdasdasdasdasdsasd')
       })
     },
     destroyed() {
