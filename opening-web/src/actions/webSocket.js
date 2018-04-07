@@ -42,7 +42,7 @@ export default {
     this.socket = new WebSocket(url)
     this.socket.onmessage = (event) => {
       const data = JSON.parse(event.data)
-      this.log(`WebSocket 接收到消息：${data}`)
+      this.log('WebSocket 接收到消息：', data)
       if (data === this.loopData) {
         this.sendLoop()
       } else {
@@ -77,6 +77,7 @@ export default {
     if (!msg) {
       throw  new Error(`发送的消息：${msg} 不能为空！`)
     }
+    this.log('发送消息：', msg)
     if (!this.socket) {
       this.open(this.url)
       setTimeout(() => {
