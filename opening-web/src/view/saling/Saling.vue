@@ -24,30 +24,36 @@
 
 <script>
   import {allHouseApi} from '../../api/houseApi'
-  import {mineApi} from '../../api/adminApi'
   import webSocket from '../../actions/webSocket'
 
   export default {
     name: "saling",
     data() {
       return {
-        list: [],
+        list: {},
       }
     },
     created() {
       allHouseApi().then(list => {
         this.list = list
       })
-      mineApi().then((user) => {
-        // webSocket.init(`ws://${location.host}/websocket/${user.id}`, {debug: true})
-        webSocket.init(`ws://localhost:8090/websocket/${user.id}`, {debug: true})
-        webSocket.onMessage = ({command, data}) => {
-          if (command === '@notice') {
-            console.log(data)
+      webSocket.init(`ws://${location.host}/websocket/0`, {debug: false})
+      // webSocket.init(`ws://localhost:8090/websocket/0`, {debug: true})
+      webSocket.onMessage = ({command, data}) => {
+        if (command === '@notice') {
+          const {user, house} = data
+          const h = this.list[house.buildingNo][house.floorNo].find(u => u.roomNo === house.roomNo)
+          if (h) {
+            h.userId = user.id
           }
+          this.$notify({
+            title: '认筹通知',
+            message: `恭喜${user.name}购得${house.roomNo}房源!`,
+            position: 'bottom-right',
+            type: 'success'
+          });
         }
-        webSocket.send('asdasdasdasdasdasdsasd')
-      })
+      }
     },
     destroyed() {
       webSocket.close()

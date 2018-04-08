@@ -95,8 +95,8 @@
             success: function (data) {
                 var user = data.user
                 var house = data.house
-                mui('#name')[0].innerText = user.name
-                mui('#headimgurl')[0].setAttribute('src', user.headimgurl)
+                mui('#name')[0].innerText = user.name || '未知'
+                mui('#headimgurl')[0].setAttribute('src', user.headimgurl || 'img/bg-01.jpg')
                 if (house) {
                     mui('#phone')[0].innerText = user.phone
                     mui('#roomNo')[0].innerText = house.roomNo

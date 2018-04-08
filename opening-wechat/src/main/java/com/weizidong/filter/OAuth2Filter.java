@@ -47,9 +47,12 @@ public class OAuth2Filter implements Filter {
         // 判断是否已登录
         Session session = SessionUtil.getSession(httpRequest);
         if (session != null) {
-            // 已登录
-            chain.doFilter(request, response);
-            return;
+            User u = SessionUtil.getUser(httpRequest, User.class);
+            if (u != null && u.getId() != null && u.getId() > 0) {
+                // 已登录
+                chain.doFilter(request, response);
+                return;
+            }
         }
         // 未登录，获取token
         String token = SessionUtil.getToken(httpRequest);
