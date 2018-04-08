@@ -1,5 +1,6 @@
 package com.weizidong.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.weizidong.model.dao.HouseDao;
 import com.weizidong.model.entity.House;
 import com.weizidong.model.entity.HouseType;
@@ -9,6 +10,8 @@ import com.weizidong.rest.dto.HouseDto;
 import org.restful.api.filter.exception.ResponseCode;
 import org.restful.api.filter.exception.WebException;
 import org.restful.api.utils.Assert;
+import org.restful.api.websocket.BaseWebSocket;
+import org.restful.api.websocket.SocketMsg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +60,7 @@ public class HouseService {
         res.put("name", u.getName());
         res.put("room", h.getRoomNo());
         res.put("time", h.getSalesTime());
+        BaseWebSocket.sendMessageToUser("0", new SocketMsg(new JSONObject().fluentPut("user", u).fluentPut("house", h)));
         return res;
     }
 
