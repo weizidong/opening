@@ -79,6 +79,13 @@ public class UserApi {
     }
 
     @POST
+    @Path("/export-user-list")
+    @Authority({"user-list"})
+    public String exportUserList() {
+        return userService.exportUserList();
+    }
+
+    @POST
     @Path("/list")
     @Authority({"user-admin"})
     public PageInfo<User> list(PageParam param) {

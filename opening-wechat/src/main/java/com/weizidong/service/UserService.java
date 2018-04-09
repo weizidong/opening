@@ -13,11 +13,10 @@ import org.restful.api.session.SessionUtil;
 import org.restful.api.utils.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.wzd.framwork.utils.PropertiesUtil;
-import org.wzd.framwork.utils.QRCodeUtil;
-import org.wzd.framwork.utils.RegexUtils;
+import org.wzd.framwork.utils.*;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户业务
@@ -169,5 +168,27 @@ public class UserService {
      */
     public PageInfo<UserHouseDto> userList(PageParam param) {
         return new PageInfo<>(houseDao.userList(param));
+    }
+
+    /**
+     * 导出认筹者列表
+     *
+     * @return excel地址
+     */
+    public String exportUserList() {
+        PageParam param = new PageParam();
+        param.setPageSize(null);
+        List<UserHouseDto> data = houseDao.userList(param);
+        String[] header = new String[]{
+                "姓名@name@@4000",
+                "电话@phone@@4000",
+                "家庭住址@address@@4000",
+                "身份证@idNumber@@4000",
+                "楼栋号@buildingNo@num@4000",
+                "楼层@floorNo@num@4000",
+                "房号@roomNo@num@4000",
+                "总价@totalPrice@money@4000"
+        };
+        return PoiExcelUtils.createExcel2FilePath("认筹记录", "认筹记录", FileUtil.BASE_PATH, header, data);
     }
 }
