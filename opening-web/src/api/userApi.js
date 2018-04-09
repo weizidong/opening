@@ -5,5 +5,7 @@ const ROOT = '/user'
 export const getUserListApi = ({page = 1, pageSize = 10, name} = {}) => ajax.post(`${ROOT}/list`, {page, pageSize, name})
 // 获取认筹列表
 export const getUserHouseApi = ({page = 1, pageSize = 10, phone} = {}) => ajax.post(`${ROOT}/user-list`, {page, pageSize, phone})
+// 导出认筹列表
+export const exportUserHouseApi = () => ajax.post(`${ROOT}/export-user-list`)
 // 登记用户
 export const addUserApi = ({phone, idNumber, name, address}) => ajax.post(`${ROOT}/add`, {phone, idNumber, name, address})

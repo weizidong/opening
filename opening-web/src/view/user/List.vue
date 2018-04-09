@@ -2,6 +2,7 @@
   <div class="content_data">
     <Breadcrumb/>
     <TablePage>
+      <ExportButton text="导出全部" :method="exportUserHouseApi" :show-time="false"/>
       <el-table :data="data.list" v-loading="data.loading" element-loading-text="拼命加载中...">
         <el-table-column prop="name" label="姓名" :formatter="defValFilter02" min-width="100"/>
         <el-table-column prop="phone" label="电话" :formatter="defValFilter02" min-width="140"/>
@@ -18,15 +19,16 @@
 </template>
 
 <script>
-  import {getUserHouseApi} from '../../api/userApi'
+  import {getUserHouseApi, exportUserHouseApi} from '../../api/userApi'
   import {defValFilter01, defValFilter02, defValFilter03} from '../../constant/filter'
   import MyPagination from '../../components/MyPagination.vue'
   import Breadcrumb from '../../components/Breadcrumb.vue'
   import TablePage from '../../components/TablePage.vue'
+  import ExportButton from '../../components/ExportButton.vue'
 
   export default {
     name: 'userHouseList',
-    components: {MyPagination, Breadcrumb, TablePage},
+    components: {MyPagination, Breadcrumb, TablePage, ExportButton},
     data() {
       return {
         data: {page: 1, pageSize: 10, list: [], total: 0, loading: false},
@@ -36,6 +38,7 @@
       defValFilter01,
       defValFilter02,
       defValFilter03,
+      exportUserHouseApi,
       findList(page = {}) {
         this.data.loading = true
         getUserHouseApi({...this.data, ...page}).then(({total, list}) => {
