@@ -1,52 +1,51 @@
 // WebSocket 封装
-export default {
-  debug: true,// 开启debug模式
+const webSocket = {
   socket: null,
-  url: null,// 连接地址
-  waitTime: 500,// 重连等待时间
+  url: null,
+  debug: true,// 开启debug模式
   reConnect: true,// 是否断线重连
-  reConnectTime: 10, // 断线重连次数
+  waitTime: 500,// 重连等待时间
   loop: true,// 是否保持心跳连接
   loopData: '@heart',// 心跳包数据
   loopTime: 10000,// 心跳间隔时间
-  connectTime: 0,// 连接次数
   loopTimer: null,// 心跳定时器
-  onMessage: (msg) => { // 消息监听
-    this.log(`接收到 WebSocket 消息：${msg}`)
-  },
+  listener: {},// 监听器
+  onMessage: (key, fn = (msg) => console.log(`接收到 WebSocket 消息：${msg}`)) => this.listener[key] = fn,
   log(...msg) {
     if (this.debug) {
       console.log(...msg)
     }
   },
-  init(url, {waitTime = 500, reConnect = true, loop = true, loopData = '@heart', loopTime = 10000, reConnectTime = 10, debug = false} = {}) {
+  init({debug = false, waitTime = 500, loop = true, loopData = '@heart', loopTime = 10000} = {}) {
     this.waitTime = waitTime
-    this.reConnect = reConnect
     this.loop = loop
     this.loopData = loopData
     this.loopTime = loopTime
-    this.reConnectTime = reConnectTime
     this.debug = debug
-    this.open(url)
     return this
   },
-  open(url) {
+  open(url, reConnect = true) {
     if (this.socket) {
       this.close()
     }
+    this.reConnect = reConnect
     if (!url) {
       throw  new Error(`WebSocket 连接地址：${url} 错误！`)
     }
     this.url = url
-    this.connectTime++
     this.socket = new WebSocket(url)
     this.socket.onmessage = (event) => {
-      const data = JSON.parse(event.data)
-      this.log('WebSocket 接收到消息：', data)
-      if (data === this.loopData) {
+      const msg = JSON.parse(event.data)
+      this.log('WebSocket 接收到消息：', msg)
+      if (msg === this.loopData) {
         this.sendLoop()
       } else {
-        this.onMessage(data)
+        let {command, data} = msg
+        for (let {key, fn} in this.listener) {
+          if (command === key) {
+            fn(data)
+          }
+        }
       }
     }
     this.socket.onopen = () => {
@@ -65,6 +64,7 @@ export default {
   },
   close() {
     this.reConnect = false
+    this.loopTimer && clearTimeout(this.loopTimer)
     this.socket && this.socket.close()
   },
   sendLoop() {
@@ -90,3 +90,20 @@ export default {
     }
   }
 }
+
+export default webSocket.init({
+  debug: false,// 开启debug模式
+  waitTime: 500,// 重连等待时间
+  loop: true,// 是否保持心跳连接
+  loopData: '@heart',// 心跳包数据
+  loopTime: 10000,// 心跳间隔时间
+})
+/**
+ * TODO：使用说明
+ */
+// import webSocket from './webSocket'
+//
+// webSocket.open('ws://locahost:8081/websocket/{userId}', true)
+// webSocket.onMessage('通知事件名称，不能重复唯一', (msg) => {
+//   console.log('这是消息体', msg)
+// })

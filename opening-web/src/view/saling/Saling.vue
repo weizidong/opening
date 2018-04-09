@@ -37,22 +37,19 @@
       allHouseApi().then(list => {
         this.list = list
       })
-      webSocket.init(`ws://${location.host}/websocket/0`, {debug: true})
-      // webSocket.init(`ws://localhost:8090/websocket/0`, {debug: true})
-      webSocket.onMessage = ({command, data}) => {
-        if (command === '@notice') {
-          const {user, house} = data
-          const idx = this.list[house.buildingNo][house.floorNo].findIndex(u => u.roomNo === house.roomNo)
-          if (idx !== -1) {
-            this.$set(this.list[house.buildingNo][house.floorNo][idx], "userId", user.id)
-          }
-          this.$notify({
-            title: '认筹通知',
-            message: `恭喜${user.name}购得${house.roomNo}房源!`,
-            type: 'success'
-          });
+      webSocket.open(`ws://${location.host}/websocket/0`)
+      // webSocket.init(`ws://localhost:8090/websocket/0`)
+      webSocket.onMessage('@notice', ({user: {name, id}, house: {buildingNo, floorNo, roomNo}}) => {
+        const idx = this.list[buildingNo][floorNo].findIndex(u => u.roomNo === roomNo)
+        if (idx !== -1) {
+          this.$set(this.list[buildingNo][floorNo][idx], "userId", id)
         }
-      }
+        this.$notify({
+          title: '认筹通知',
+          message: `恭喜${name}购得${roomNo}房源!`,
+          type: 'success'
+        });
+      })
     },
     destroyed() {
       webSocket.close()
