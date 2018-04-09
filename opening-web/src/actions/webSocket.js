@@ -43,11 +43,7 @@ const webSocket = {
         this.sendLoop()
       } else {
         let {command, data} = msg
-        for (let {key, fn} in this.listener) {
-          if (command === key) {
-            fn(data)
-          }
-        }
+        this.listener[command] && this.listener[command](data)
       }
     }
     this.socket.onopen = () => {
@@ -94,7 +90,7 @@ const webSocket = {
 }
 
 export default webSocket.init({
-  debug: false,// 开启debug模式
+  debug: true,// 开启debug模式
   waitTime: 500,// 重连等待时间
   loop: true,// 是否保持心跳连接
   loopData: '@heart',// 心跳包数据
