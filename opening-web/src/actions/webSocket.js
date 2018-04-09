@@ -10,7 +10,9 @@ const webSocket = {
   loopTime: 10000,// 心跳间隔时间
   loopTimer: null,// 心跳定时器
   listener: {},// 监听器
-  onMessage: (key, fn = (msg) => console.log(`接收到 WebSocket 消息：${msg}`)) => this.listener[key] = fn,
+  onMessage(key, fn = (msg) => console.log(`接收到 WebSocket 消息：${msg}`)) {
+    this.listener[key] = fn
+  },
   log(...msg) {
     if (this.debug) {
       console.log(...msg)
