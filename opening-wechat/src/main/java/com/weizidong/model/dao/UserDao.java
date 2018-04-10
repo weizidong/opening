@@ -5,7 +5,8 @@ import com.qcdl.model.param.PageParam;
 import com.weizidong.model.entity.User;
 import com.weizidong.model.enums.DeleteStatus;
 import com.weizidong.model.mapper.UserMapper;
-import com.weizidong.rest.dto.UserHouseDto;
+import com.weizidong.rest.dto.UserDto;
+import com.weizidong.rest.param.UserParam;
 import org.springframework.stereotype.Component;
 import tk.mybatis.mapper.entity.Example;
 
@@ -110,4 +111,16 @@ public class UserDao {
         return userMapper.selectByExample(e);
     }
 
+    /**
+     * 分页查询客户列表
+     *
+     * @param param 分页查询参数
+     * @return 用户列表
+     */
+    public List<UserDto> allUserList(UserParam param) {
+        if (param.getPageSize() != null && param.getPageSize() > 0) {
+            PageHelper.startPage(param.getPage(), param.getPageSize());
+        }
+        return userMapper.allUserList(param);
+    }
 }

@@ -1,31 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.weizidong.model.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.weizidong.model.entity.User">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="openid" jdbcType="VARCHAR" property="openid" />
-    <result column="subscribe" jdbcType="INTEGER" property="subscribe" />
-    <result column="subscribe_time" jdbcType="TIMESTAMP" property="subscribeTime" />
-    <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-    <result column="sex" jdbcType="INTEGER" property="sex" />
-    <result column="province" jdbcType="VARCHAR" property="province" />
-    <result column="city" jdbcType="VARCHAR" property="city" />
-    <result column="country" jdbcType="VARCHAR" property="country" />
-    <result column="qrcode" jdbcType="VARCHAR" property="qrcode" />
-    <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl" />
-    <result column="language" jdbcType="VARCHAR" property="language" />
-    <result column="unionid" jdbcType="VARCHAR" property="unionid" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-    <result column="deleted" jdbcType="INTEGER" property="deleted" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="id_number" jdbcType="VARCHAR" property="idNumber" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="admin_id" jdbcType="INTEGER" property="adminId" />
-  </resultMap>
+    <resultMap id="BaseResultMap" type="com.weizidong.model.entity.User">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="openid" jdbcType="VARCHAR" property="openid"/>
+        <result column="subscribe" jdbcType="INTEGER" property="subscribe"/>
+        <result column="subscribe_time" jdbcType="TIMESTAMP" property="subscribeTime"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="sex" jdbcType="INTEGER" property="sex"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="country" jdbcType="VARCHAR" property="country"/>
+        <result column="qrcode" jdbcType="VARCHAR" property="qrcode"/>
+        <result column="headimgurl" jdbcType="VARCHAR" property="headimgurl"/>
+        <result column="language" jdbcType="VARCHAR" property="language"/>
+        <result column="unionid" jdbcType="VARCHAR" property="unionid"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="deleted" jdbcType="INTEGER" property="deleted"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="id_number" jdbcType="VARCHAR" property="idNumber"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="admin_id" jdbcType="INTEGER" property="adminId"/>
+    </resultMap>
+    <resultMap id="UserDtoMap" type="com.weizidong.rest.dto.UserDto" extends="BaseResultMap">
+        <result column="houseId" jdbcType="INTEGER" property="houseId"/>
+        <result column="building_no" jdbcType="INTEGER" property="buildingNo"/>
+        <result column="floor_no" jdbcType="INTEGER" property="floorNo"/>
+        <result column="room_no" jdbcType="INTEGER" property="roomNo"/>
+        <result column="house_type" jdbcType="INTEGER" property="houseType"/>
+        <result column="sales_time" jdbcType="TIMESTAMP" property="salesTime"/>
+        <result column="total_price" jdbcType="DOUBLE" property="totalPrice"/>
+    </resultMap>
+    <select id="allUserList" resultType="com.weizidong.rest.dto.UserDto">
+        SELECT
+            u.*,
+            h.id AS houseId,
+            h.building_no,
+            h.floor_no,
+            h.room_no,
+            h.house_type,
+            h.sales_time,
+            h.total_price
+        FROM user u LEFT JOIN house h ON u.id = h.user_id
+        WHERE u.deleted = 0
+    </select>
 </mapper>

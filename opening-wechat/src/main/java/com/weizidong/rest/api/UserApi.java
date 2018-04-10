@@ -4,7 +4,9 @@ import com.github.pagehelper.PageInfo;
 import com.qcdl.model.entity.Admin;
 import com.qcdl.model.param.PageParam;
 import com.weizidong.model.entity.User;
+import com.weizidong.rest.dto.UserDto;
 import com.weizidong.rest.dto.UserHouseDto;
+import com.weizidong.rest.param.UserParam;
 import com.weizidong.service.UserService;
 import org.restful.api.filter.authority.Authority;
 import org.restful.api.session.SessionUtil;
@@ -62,7 +64,6 @@ public class UserApi {
         userService.bind(db);
     }
 
-
     @POST
     @Path("/add")
     @Authority({"user"})
@@ -76,6 +77,13 @@ public class UserApi {
     @Authority({"user-list"})
     public PageInfo<UserHouseDto> userList(PageParam param) {
         return userService.userList(param);
+    }
+
+    @POST
+    @Path("/all-user-list")
+    @Authority({"all-user-list"})
+    public PageInfo<UserDto> allUserList(UserParam param) {
+        return userService.allUserList(param);
     }
 
     @POST

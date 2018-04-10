@@ -1,6 +1,5 @@
 <template>
   <div class="content_data">
-    // 所有客户列表
     <Breadcrumb/>
     <TablePage>
       <el-table :data="data.list" v-loading="data.loading" element-loading-text="拼命加载中...">
@@ -19,7 +18,7 @@
 </template>
 
 <script>
-  import {getUserHouseApi, exportUserHouseApi} from '../../api/userApi'
+  import {getAllUserApi} from '../../api/userApi'
   import {defValFilter01, defValFilter02, defValFilter03} from '../../constant/filter'
   import MyPagination from '../../components/MyPagination.vue'
   import Breadcrumb from '../../components/Breadcrumb.vue'
@@ -38,10 +37,9 @@
       defValFilter01,
       defValFilter02,
       defValFilter03,
-      exportUserHouseApi,
       findList(page = {}) {
         this.data.loading = true
-        getUserHouseApi({...this.data, ...page}).then(({total, list}) => {
+        getAllUserApi({...this.data, ...page}).then(({total, list}) => {
           this.data = {list, total, ...page, loading: false}
         })
       },

@@ -6,7 +6,9 @@ import com.weizidong.model.dao.HouseDao;
 import com.weizidong.model.dao.UserDao;
 import com.weizidong.model.entity.User;
 import com.weizidong.model.enums.DeleteStatus;
+import com.weizidong.rest.dto.UserDto;
 import com.weizidong.rest.dto.UserHouseDto;
+import com.weizidong.rest.param.UserParam;
 import com.weizidong.utils.WechatConfigs;
 import org.apache.commons.lang3.StringUtils;
 import org.restful.api.session.SessionUtil;
@@ -190,5 +192,15 @@ public class UserService {
                 "总价@totalPrice@money@4000"
         };
         return PoiExcelUtils.createExcel2FilePath("认筹记录", "认筹记录", FileUtil.BASE_PATH, header, data);
+    }
+
+    /**
+     * 获取客户列表
+     *
+     * @param param 分页参数
+     * @return 客户列表
+     */
+    public PageInfo<UserDto> allUserList(UserParam param) {
+        return new PageInfo<>(userDao.allUserList(param));
     }
 }
